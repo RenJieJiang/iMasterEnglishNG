@@ -23,7 +23,7 @@ import { WordsComponent } from './words/words.component';
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent },
                     { path: 'update-password', component: ChangePasswordComponent },
-                    { path: 'words', component: WordsComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] }
+                    { path: 'words', component: WordsComponent, data: { permission: 'Pages.Words' }, canActivate: [AppRouteGuard] }
                 ]
             }
         ])
