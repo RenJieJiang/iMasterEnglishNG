@@ -121,11 +121,11 @@ namespace iMasterEnglishNG.Web.Host.Startup
         {
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 
-            app.UseCors(_defaultCorsPolicyName); // Enable CORS!
-
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(_defaultCorsPolicyName); // Enable CORS!
 
             app.UseAuthentication();
 

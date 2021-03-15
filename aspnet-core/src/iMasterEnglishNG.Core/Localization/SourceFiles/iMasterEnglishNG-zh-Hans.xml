@@ -97,7 +97,19 @@
     <text name="DeleteTenantConfirm">确认删除该租户？</text>
     <text name="EditTenant">编辑租户</text>
     <text name="SearchWithThreeDot">搜索...</text>
-    
+
+    <!--Global-->
+    <text name="lastModificationTime">最近更新时间</text>
+    <!--Word-->
+    <text name="Word">单词</text>
+    <text name="Words">单词</text>
+    <text name="Frequency">频率</text>
+    <text name="PhoneticSymbol">音标</text>
+    <text name="Definition">解释</text>
+    <text name="Synonym">同义词</text>
+    <text name="Antonym">反义词</text>
+    <text name="CreateWord">新建单词</text>
+    <text name="EditWord">编辑单词</text>
   </texts>
 </localizationDictionary>
 

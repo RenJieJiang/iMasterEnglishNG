@@ -116,5 +116,19 @@
     <text name="Clear">Clear</text>
     <text name="ResetPasswordStepOneInfo">1. Enter your administrator password</text>
     <text name="ResetPasswordStepTwoInfo">2. Copy this random password so you can send it to the user</text>
+
+    <!--Global-->
+    <text name="lastModificationTime">Last Modification Time</text>
+    <!--Word-->
+    <text name="Word">Word</text>
+    <text name="Words">Words</text>
+    <text name="Frequency">Frequency</text>
+    <text name="PhoneticSymbol">Phonetic Symbol</text>
+    <text name="Definition">Definition</text>
+    <text name="Synonym">Synonym</text>
+    <text name="Antonym">Antonym</text>
+    <text name="CreateWord">Create Word</text>
+    <text name="EditWord">Edit Word</text>
+    <text name="WordDeleteWarningMessage">Word {0} will be deleted.</text>
   </texts>
 </localizationDictionary>

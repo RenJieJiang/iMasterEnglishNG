@@ -1,0 +1,106 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createWordForm="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'CreateWord' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="word">
+        {{ "Word" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          name="word"
+          id="word"
+          required
+          maxlength="100"
+          [(ngModel)]="word.word"
+          #wordModel="ngModel"
+          #wordEl
+        />
+        <abp-validation-summary
+          [control]="wordModel"
+          [controlEl]="wordEl"
+        ></abp-validation-summary>
+      </div>
+    </div>
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="phoneticSymbol">
+        {{ "PhoneticSymbol" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          name="phoneticSymbol"
+          id="phoneticSymbol"
+          required
+          maxlength="100"
+          [(ngModel)]="word.phoneticSymbol"
+          #phoneticSymbolModel="ngModel"
+          #phoneticSymbolEl
+        />
+        <abp-validation-summary
+          [control]="phoneticSymbolModel"
+          [controlEl]="phoneticSymbolEl"
+        ></abp-validation-summary>
+      </div>
+    </div>
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="frequency">
+        {{ "Frequency" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="number"
+          class="form-control"
+          name="frequency"
+          id="frequency"
+          required
+          [(ngModel)]="word.frequency"
+          #frequencyModel="ngModel"
+          #frequencyEl
+        />
+        <abp-validation-summary
+        [control]="frequencyModel"
+        [controlEl]="frequencyEl"
+      ></abp-validation-summary>
+      </div>
+    </div>
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="definition">
+        {{ "Definition" | localize }}
+      </label>
+      <div class="col-md-9">
+        <textarea
+          type="text"
+          class="form-control"
+          name="definition"
+          id="definition"
+          required
+          maxlength="1000"
+          [(ngModel)]="word.definition"
+          #definitionModel="ngModel"
+          #definitionEl
+          >
+        </textarea>
+        <abp-validation-summary
+          [control]="definitionModel"
+          [controlEl]="definitionEl"
+        ></abp-validation-summary>
+      </div>
+    </div>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createWordForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
