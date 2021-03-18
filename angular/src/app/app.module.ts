@@ -42,6 +42,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 import { WordsComponent } from './words/words.component';
 import { CreateWordDialogComponent } from './words/create-word/create-word-dialog.component';
 import { EditWordDialogComponent } from './words/edit-word/edit-word-dialog.component';
+import { WordState } from './words/state/word.state';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,7 @@ import { EditWordDialogComponent } from './words/edit-word/edit-word-dialog.comp
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
+    NgxsModule.forRoot([WordState])
   ],
   providers: [],
   entryComponents: [

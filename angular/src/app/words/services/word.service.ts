@@ -1,11 +1,13 @@
-import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
-import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 import * as moment from 'moment';
-import { blobToText, throwException, API_BASE_URL} from './service-proxies';
+import { blobToText, throwException, API_BASE_URL} from '../../../shared/service-proxies/service-proxies';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class WordServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -36,17 +38,17 @@ export class WordServiceProxy {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processCreate(<any>response_);
                 } catch (e) {
-                    return <Observable<WordDto>><any>_observableThrow(e);
+                    return <Observable<WordDto>><any>throwError(e);
                 }
             } else
-                return <Observable<WordDto>><any>_observableThrow(response_);
+                return <Observable<WordDto>><any>throwError(response_);
         }));
     }
 
@@ -58,18 +60,18 @@ export class WordServiceProxy {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = WordDto.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<WordDto>(<any>null);
+        return of<WordDto>(<any>null);
     }
 
     /**
@@ -92,17 +94,17 @@ export class WordServiceProxy {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetWords(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetWords(<any>response_);
                 } catch (e) {
-                    return <Observable<WordListDtoListResultDto>><any>_observableThrow(e);
+                    return <Observable<WordListDtoListResultDto>><any>throwError(e);
                 }
             } else
-                return <Observable<WordListDtoListResultDto>><any>_observableThrow(response_);
+                return <Observable<WordListDtoListResultDto>><any>throwError(response_);
         }));
     }
 
@@ -114,18 +116,18 @@ export class WordServiceProxy {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = WordListDtoListResultDto.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<WordListDtoListResultDto>(<any>null);
+        return of<WordListDtoListResultDto>(<any>null);
     }
 
     /**
@@ -148,17 +150,17 @@ export class WordServiceProxy {
             })
         };
 
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("put", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processUpdate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processUpdate(<any>response_);
                 } catch (e) {
-                    return <Observable<WordDto>><any>_observableThrow(e);
+                    return <Observable<WordDto>><any>throwError(e);
                 }
             } else
-                return <Observable<WordDto>><any>_observableThrow(response_);
+                return <Observable<WordDto>><any>throwError(response_);
         }));
     }
 
@@ -170,18 +172,18 @@ export class WordServiceProxy {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = WordDto.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<WordDto>(<any>null);
+        return of<WordDto>(<any>null);
     }
 
     /**
@@ -203,17 +205,17 @@ export class WordServiceProxy {
             })
         };
 
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("delete", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processDelete(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<void>><any>_observableThrow(e);
+                    return <Observable<void>><any>throwError(e);
                 }
             } else
-                return <Observable<void>><any>_observableThrow(response_);
+                return <Observable<void>><any>throwError(response_);
         }));
     }
 
@@ -225,15 +227,15 @@ export class WordServiceProxy {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return _observableOf<void>(<any>null);
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
+            return of<void>(<any>null);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<void>(<any>null);
+        return of<void>(<any>null);
     }
 
     /**
@@ -256,17 +258,17 @@ export class WordServiceProxy {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<WordDto>><any>_observableThrow(e);
+                    return <Observable<WordDto>><any>throwError(e);
                 }
             } else
-                return <Observable<WordDto>><any>_observableThrow(response_);
+                return <Observable<WordDto>><any>throwError(response_);
         }));
     }
 
@@ -278,18 +280,18 @@ export class WordServiceProxy {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = WordDto.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<WordDto>(<any>null);
+        return of<WordDto>(<any>null);
     }
 
     /**
@@ -321,18 +323,20 @@ export class WordServiceProxy {
                 "Accept": "text/plain"
             })
         };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_)
+        .pipe(mergeMap((response_ : any) => {
             return this.processGetAll(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        }))
+        .pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetAll(<any>response_);
+                    const a = this.processGetAll(<any>response_);
+                    return a;
                 } catch (e) {
-                    return <Observable<WordDtoPagedResultDto>><any>_observableThrow(e);
+                    return <Observable<WordDtoPagedResultDto>><any>throwError(e);
                 }
             } else
-                return <Observable<WordDtoPagedResultDto>><any>_observableThrow(response_);
+                return <Observable<WordDtoPagedResultDto>><any>throwError(response_);
         }));
     }
 
@@ -344,18 +348,19 @@ export class WordServiceProxy {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = WordDtoPagedResultDto.fromJS(resultData200);
-            return _observableOf(result200);
+            console.log(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<WordDtoPagedResultDto>(<any>null);
+        return of<WordDtoPagedResultDto>(<any>null);
     }
 }
 

@@ -3,7 +3,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AbpHttpInterceptor } from 'abp-ng2-module';
 
 import * as ApiServiceProxies from './service-proxies';
-import * as WordApiServiceProxies from './word';
+//import * as WordApiServiceProxies from '../../app/words/services/word.service';
 
 @NgModule({
     providers: [
@@ -14,7 +14,7 @@ import * as WordApiServiceProxies from './word';
         ApiServiceProxies.TokenAuthServiceProxy,
         ApiServiceProxies.AccountServiceProxy,
         ApiServiceProxies.ConfigurationServiceProxy,
-        WordApiServiceProxies.WordServiceProxy,
+        //WordApiServiceProxies.WordServiceProxy,
         { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true }
     ]
 })

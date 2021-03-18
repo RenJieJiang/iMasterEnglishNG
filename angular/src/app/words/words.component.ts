@@ -10,9 +10,14 @@ import {
   WordServiceProxy,
   WordDto,
   WordDtoPagedResultDto
-} from '@shared/service-proxies/word';
+} from './services/word.service';
 import { CreateWordDialogComponent } from './create-word/create-word-dialog.component';
 import { EditWordDialogComponent } from './edit-word/edit-word-dialog.component';
+import { Select, Store } from '@ngxs/store';
+import { Word } from './state/word.actions';
+import { WordState } from './state/word.state';
+import { Observable } from 'rxjs';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 class PagedWordsRequestDto extends PagedRequestDto {
   word: string;
@@ -23,13 +28,17 @@ class PagedWordsRequestDto extends PagedRequestDto {
   animations: [appModuleAnimation()]
 })
 export class WordsComponent extends PagedListingComponentBase<WordDto> {
+  @Select(WordState.getWords)
+  words$: Observable<WordDtoPagedResultDto>;
+
   words: WordDto[] = [];
   word = '';
 
   constructor(
     injector: Injector,
     private _wordsService: WordServiceProxy,
-    private _modalService: BsModalService
+    private _modalService: BsModalService,
+    private store: Store
   ) {
     super(injector);
   }
@@ -41,17 +50,16 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
   ): void {
     request.word = this.word;
 
-    this._wordsService
-      .getAll(request.word, request.skipCount, request.maxResultCount)
-      .pipe(
-        finalize(() => {
-          finishedCallback();
-        })
-      )
-      .subscribe((result: WordDtoPagedResultDto) => {
+    this.store
+    .dispatch(new Word.GetAll(request))
+    .pipe(finalize(() => {
+      finishedCallback();
+      this.words$.subscribe((result: WordDtoPagedResultDto) => {
         this.words = result.items;
         this.showPaging(result, pageNumber);
       });
+    }))
+    .subscribe(() => { });
   }
 
   delete(word: WordDto): void {
@@ -91,8 +99,7 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
           class: 'modal-lg',
         }
       );
-    }
-    else {
+    } else {
       createOrEditWordDialog = this._modalService.show(
         EditWordDialogComponent,
         {

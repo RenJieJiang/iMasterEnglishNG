@@ -13,7 +13,7 @@ import {
   WordServiceProxy,
   WordDto,
   WordEditDto,
-} from '@shared/service-proxies/word';
+} from '../services/word.service';
 
 @Component({
   templateUrl: 'edit-word-dialog.component.html'

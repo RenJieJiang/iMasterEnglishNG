@@ -5,15 +5,16 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { finalize,take,mergeMap, switchMap } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   WordServiceProxy,
   WordDto,
   CreateWordDto,
-} from '@shared/service-proxies/word';
+} from '../services/word.service';
 import { forEach as _forEach, map as _map } from 'lodash-es';
+import { interval,of, timer } from 'rxjs';
 
 @Component({
   templateUrl: 'create-word-dialog.component.html'

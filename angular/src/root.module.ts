@@ -19,6 +19,9 @@ import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
 import { RootComponent } from './root.component';
 import { AppInitializer } from './app-initializer';
 
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'environments/environment';
+
 export function getCurrentLanguage(): string {
   if (abp.localization.currentLanguage.name) {
     return abp.localization.currentLanguage.name;
@@ -40,6 +43,9 @@ export function getCurrentLanguage(): string {
     TabsModule.forRoot(),
     ServiceProxyModule,
     RootRoutingModule,
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production
+    })
   ],
   declarations: [RootComponent],
   providers: [
