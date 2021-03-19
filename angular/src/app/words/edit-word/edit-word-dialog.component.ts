@@ -14,12 +14,18 @@ import {
   WordDto,
   WordEditDto,
 } from '../services/word.service';
+import { Select, Store } from '@ngxs/store';
+import { Word } from '../state/word.actions';
+import { WordState } from '../state/word.state';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: 'edit-word-dialog.component.html'
 })
-export class EditWordDialogComponent extends AppComponentBase
-  implements OnInit {
+export class EditWordDialogComponent extends AppComponentBase implements OnInit {
+  @Select(WordState.getWord)
+  words$: Observable<WordDto>;
+
   saving = false;
   id: number;
   word = new WordDto();
@@ -31,17 +37,23 @@ export class EditWordDialogComponent extends AppComponentBase
   constructor(
     injector: Injector,
     private _wordService: WordServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private store: Store
   ) {
     super(injector);
   }
 
   ngOnInit(): void {
-    this._wordService
-      .get(this.id)
-      .subscribe((result: WordDto) => {
-        this.word = result;
-      });
+    this.store
+    .dispatch(new Word.Get(this.id))
+    .pipe(
+      finalize(() => {
+        this.words$.subscribe((result: WordDto) => {
+          this.word = result;
+        });
+      })
+    )
+    .subscribe(() => {});
   }
 
   save(): void {
@@ -50,17 +62,17 @@ export class EditWordDialogComponent extends AppComponentBase
     const word = new WordDto();
     word.init(this.word);
 
-    this._wordService
-      .update(word)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-        })
-      )
-      .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
-        this.onSave.emit();
-      });
+    this.store
+    .dispatch(new Word.Edit(this.word))
+    .pipe(
+      finalize(() => {
+        this.saving = false;
+      })
+    )
+    .subscribe(() => {
+      this.notify.info(this.l('SavedSuccessfully'));
+      this.bsModalRef.hide();
+      this.onSave.emit();
+    });
   }
 }

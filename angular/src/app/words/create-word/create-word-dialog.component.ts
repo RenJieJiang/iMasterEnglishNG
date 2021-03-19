@@ -15,7 +15,10 @@ import {
 } from '../services/word.service';
 import { forEach as _forEach, map as _map } from 'lodash-es';
 import { interval,of, timer } from 'rxjs';
-
+import { Select, Store } from '@ngxs/store';
+import { Word } from '../state/word.actions';
+import { WordState } from '../state/word.state';
+import { Observable } from 'rxjs';
 @Component({
   templateUrl: 'create-word-dialog.component.html'
 })
@@ -31,7 +34,8 @@ export class CreateWordDialogComponent extends AppComponentBase
   constructor(
     injector: Injector,
     private _wordService: WordServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private store: Store
   ) {
     super(injector);
   }
@@ -45,17 +49,17 @@ export class CreateWordDialogComponent extends AppComponentBase
     const word = new CreateWordDto();
     word.init(this.word);
 
-    this._wordService
-      .create(word)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-        })
-      )
-      .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
-        this.onSave.emit();
-      });
+    this.store
+    .dispatch(new Word.Add(word))
+    .pipe(
+      finalize(() => {
+        this.saving = false;
+      })
+    )
+    .subscribe(() => {
+      this.notify.info(this.l('SavedSuccessfully'));
+      this.bsModalRef.hide();
+      this.onSave.emit();
+    });
   }
 }

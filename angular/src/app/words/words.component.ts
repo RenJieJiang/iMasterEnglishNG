@@ -68,15 +68,13 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
       undefined,
       (result: boolean) => {
         if (result) {
-          this._wordsService
-            .delete(word.id)
-            .pipe(
-              finalize(() => {
-                abp.notify.success(this.l('SuccessfullyDeleted'));
-                this.refresh();
-              })
-            )
-            .subscribe(() => {});
+          this.store
+          .dispatch(new Word.Delete(word.id))
+          .pipe(finalize(() => {
+            abp.notify.success(this.l('SuccessfullyDeleted'));
+            this.refresh();
+          }))
+          .subscribe(() => { });
         }
       }
     );
