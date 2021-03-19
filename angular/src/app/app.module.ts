@@ -44,6 +44,7 @@ import { CreateWordDialogComponent } from './words/create-word/create-word-dialo
 import { EditWordDialogComponent } from './words/edit-word/edit-word-dialog.component';
 import { WordState } from './words/state/word.state';
 import { NgxsModule } from '@ngxs/store';
+import { MaterialModule } from "../material.module";
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { NgxsModule } from '@ngxs/store';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MaterialModule,
     HttpClientModule,
     HttpClientJsonpModule,
     ModalModule.forChild(),

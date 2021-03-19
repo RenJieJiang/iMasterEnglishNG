@@ -21,6 +21,7 @@ import { AppInitializer } from './app-initializer';
 
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'environments/environment';
+import { MaterialModule } from './material.module';
 
 export function getCurrentLanguage(): string {
   if (abp.localization.currentLanguage.name) {
@@ -35,6 +36,7 @@ export function getCurrentLanguage(): string {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     HttpClientModule,
     SharedModule.forRoot(),
     ModalModule.forRoot(),
