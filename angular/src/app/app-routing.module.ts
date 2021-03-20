@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRouteGuard } from '@shared/auth/auth-route-guard';
 import { HomeComponent } from './home/home.component';
@@ -23,10 +23,15 @@ import { WordsComponent } from './words/words.component';
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent },
                     { path: 'update-password', component: ChangePasswordComponent },
-                    { path: 'words', component: WordsComponent, data: { permission: 'Pages.Words' }, canActivate: [AppRouteGuard] }
+                    {
+                        path: 'words',
+                        loadChildren: () => import('app/words/words.module').then(m => m.WordsModule), // Lazy load WordsModule
+                        data: { preload: true }
+                    }
                 ]
-            }
+            },
         ])
+
     ],
     exports: [RouterModule]
 })

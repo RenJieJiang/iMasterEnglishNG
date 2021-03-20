@@ -10,14 +10,15 @@ import {
   WordServiceProxy,
   WordDto,
   WordDtoPagedResultDto
-} from './services/word.service';
+} from '../services/word.service';
 import { CreateWordDialogComponent } from './create-word/create-word-dialog.component';
 import { EditWordDialogComponent } from './edit-word/edit-word-dialog.component';
 import { Select, Store } from '@ngxs/store';
-import { Word } from './state/word.actions';
-import { WordState } from './state/word.state';
+import { Word } from '@app/store/actions/word.actions';
+import { WordState } from '@app/store/states/word.state';
 import { Observable } from 'rxjs';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import {NgxPaginationModule} from "ngx-pagination";
 
 class PagedWordsRequestDto extends PagedRequestDto {
   word: string;

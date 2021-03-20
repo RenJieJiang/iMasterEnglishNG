@@ -13,10 +13,10 @@ import {
   WordServiceProxy,
   WordDto,
   WordEditDto,
-} from '../services/word.service';
+} from '../../services/word.service';
 import { Select, Store } from '@ngxs/store';
-import { Word } from '../state/word.actions';
-import { WordState } from '../state/word.state';
+import { Word } from '@app/store/actions/word.actions';
+import { WordState } from '@app/store/states/word.state';
 import { Observable } from 'rxjs';
 
 @Component({

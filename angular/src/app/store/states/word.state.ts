@@ -6,8 +6,8 @@ import {
   WordDtoPagedResultDto,
   WordDto,
   WordServiceProxy as WordService,
-} from "../services/word.service";
-import { Word } from "./word.actions";
+} from "@app/services/word.service";
+import { Word } from "@app/store/actions/word.actions";
 
 export class WordStateModel {
   words: WordDtoPagedResultDto;
