@@ -5,7 +5,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
   PagedListingComponentBase,
   PagedRequestDto
-} from 'shared/paged-listing-component-base';
+} from '@shared/paged-listing-component-base';
 import {
   UserServiceProxy,
   UserDto,

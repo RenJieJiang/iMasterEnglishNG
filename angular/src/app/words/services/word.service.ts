@@ -3,7 +3,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 import * as moment from 'moment';
-import { blobToText, throwException, API_BASE_URL} from '../../../shared/service-proxies/service-proxies';
+import { blobToText, throwException, API_BASE_URL} from '../../shared/service-proxies/service-proxies';
 
 @Injectable({
   providedIn: 'root'

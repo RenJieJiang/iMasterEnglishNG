@@ -19,7 +19,7 @@
     "paths": {
       "@abp/*": [ "../node_modules/abp-ng2-module/dist/src/*" ],
       "@app/*": [ "./app/*" ],
-      "@shared/*": [ "./shared/*" ],
+      "@shared/*": [ "./app/shared/*" ],
       "@node_modules/*": [ "../node_modules/*" ]
     }
   },
