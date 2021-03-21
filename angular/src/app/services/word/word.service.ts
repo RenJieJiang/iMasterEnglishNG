@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 import * as moment from 'moment';
 import { blobToText, throwException, API_BASE_URL} from '@shared/service-proxies/service-proxies';
 import WordDto from './word.model';
+import SearchResult from "@app/shared/model/search-result";
 
 @Injectable({
   providedIn: 'root'
@@ -244,7 +245,7 @@ export class WordServiceProxy {
      * @param maxResultCount (optional)
      * @return Success
      */
-    getAll(word: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<WordDtoPagedResultDto> {
+    getAll(word: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SearchResult<WordDto>> {
         let url_ = this.baseUrl + "/api/services/app/Word/GetAll?";
         if (word === null)
             throw new Error("The parameter 'word' cannot be null.");
@@ -277,14 +278,14 @@ export class WordServiceProxy {
                     const a = this.processGetAll(<any>response_);
                     return a;
                 } catch (e) {
-                    return <Observable<WordDtoPagedResultDto>><any>throwError(e);
+                    return <Observable<SearchResult<WordDto>>><any>throwError(e);
                 }
             } else
-                return <Observable<WordDtoPagedResultDto>><any>throwError(response_);
+                return <Observable<SearchResult<WordDto>>><any>throwError(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<WordDtoPagedResultDto> {
+    protected processGetAll(response: HttpResponseBase): Observable<SearchResult<WordDto>> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -295,7 +296,10 @@ export class WordServiceProxy {
             return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = WordDtoPagedResultDto.fromJS(resultData200);
+            let searchResult = new SearchResult<WordDto>();
+            searchResult.items = resultData200["items"];
+            searchResult.totalCount = resultData200["totalCount"];
+            result200 = searchResult;
             console.log(result200);
             return of(result200);
             }));
@@ -304,65 +308,65 @@ export class WordServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return of<WordDtoPagedResultDto>(<any>null);
+        return of<SearchResult<WordDto>>(<any>null);
     }
 }
 
-export class WordDtoPagedResultDto implements IWordDtoPagedResultDto {
-  totalCount: number;
-  items: WordDto[] | undefined;
+// export class WordDtoPagedResultDto implements IWordDtoPagedResultDto {
+//   totalCount: number;
+//   items: WordDto[] | undefined;
 
-  constructor(data?: IWordDtoPagedResultDto) {
-      if (data) {
-          for (var property in data) {
-              if (data.hasOwnProperty(property))
-                  (<any>this)[property] = (<any>data)[property];
-          }
-      }
-  }
+//   constructor(data?: IWordDtoPagedResultDto) {
+//       if (data) {
+//           for (var property in data) {
+//               if (data.hasOwnProperty(property))
+//                   (<any>this)[property] = (<any>data)[property];
+//           }
+//       }
+//   }
 
-  init(data?: any) {
-      if (data) {
-          this.totalCount = data["totalCount"];
-          if (Array.isArray(data["items"])) {
-              this.items = [] as any;
-              for (let item of data["items"])
-                  this.items.push(WordDto.fromJS(item));
-          }
-      }
-  }
+//   init(data?: any) {
+//       if (data) {
+//           this.totalCount = data["totalCount"];
+//           if (Array.isArray(data["items"])) {
+//               this.items = [] as any;
+//               for (let item of data["items"])
+//                   this.items.push(WordDto.fromJS(item));
+//           }
+//       }
+//   }
 
-  static fromJS(data: any): WordDtoPagedResultDto {
-    console.log('entered fromJS');
-      data = typeof data === 'object' ? data : {};
-      let result = new WordDtoPagedResultDto();
-      result.init(data);
-      return result;
-  }
+//   static fromJS(data: any): WordDtoPagedResultDto {
+//     console.log('entered fromJS');
+//       data = typeof data === 'object' ? data : {};
+//       let result = new WordDtoPagedResultDto();
+//       result.init(data);
+//       return result;
+//   }
 
-  toJSON(data?: any) {
-    console.log('entered toJSON');
-      data = typeof data === 'object' ? data : {};
-      data["totalCount"] = this.totalCount;
-      if (Array.isArray(this.items)) {
-          data["items"] = [];
-          for (let item of this.items)
-              data["items"].push(item.toJSON());
-      }
-      return data;
-  }
+//   toJSON(data?: any) {
+//     console.log('entered toJSON');
+//       data = typeof data === 'object' ? data : {};
+//       data["totalCount"] = this.totalCount;
+//       if (Array.isArray(this.items)) {
+//           data["items"] = [];
+//           for (let item of this.items)
+//               data["items"].push(item.toJSON());
+//       }
+//       return data;
+//   }
 
-  clone(): WordDtoPagedResultDto {
-    console.log('entered clone');
-      const json = this.toJSON();
-      let result = new WordDtoPagedResultDto();
-      result.init(json);
-      return result;
-  }
-}
+//   clone(): WordDtoPagedResultDto {
+//     console.log('entered clone');
+//       const json = this.toJSON();
+//       let result = new WordDtoPagedResultDto();
+//       result.init(json);
+//       return result;
+//   }
+// }
 
-export interface IWordDtoPagedResultDto {
-  totalCount: number;
-  items: WordDto[] | undefined;
-}
+// export interface IWordDtoPagedResultDto {
+//   totalCount: number;
+//   items: WordDto[] | undefined;
+// }
 

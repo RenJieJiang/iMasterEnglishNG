@@ -2,22 +2,20 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import {
-  WordDtoPagedResultDto,
-  WordServiceProxy as WordService,
-} from "@app/services/word/word.service";
-import WordDto from '@app/services/word/word.model';
+import { WordServiceProxy as WordService } from "@app/services/word/word.service";
+import WordDto from "@app/services/word/word.model";
 import { Word } from "@app/store/actions/word.actions";
+import SearchResult from "@app/shared/model/search-result";
 
-export class WordStateModel {
-  words: WordDtoPagedResultDto;
+export interface WordStateModel {
+  searchResultData: SearchResult<WordDto>;
   word: WordDto;
 }
 @State<WordStateModel>({
   name: "words",
   defaults: {
-    words: {},
-    word: null
+    searchResultData: {},
+    word: null,
   } as WordStateModel,
 })
 @Injectable()
@@ -26,7 +24,7 @@ export class WordState {
 
   @Selector()
   static getWords(state: WordStateModel) {
-    return state.words || {};
+    return state.searchResultData || {};
   }
 
   @Selector()
@@ -44,8 +42,10 @@ export class WordState {
       )
       .pipe(
         tap((response) => {
+          let page = response as SearchResult<WordDto>;
+
           ctx.patchState({
-            words: response,
+            searchResultData: page,
           });
         })
       );
@@ -53,30 +53,27 @@ export class WordState {
 
   @Action(Word.Get)
   Get(ctx: StateContext<WordStateModel>, action: Word.Get) {
-      return this.wordService
-      .get(action.id)
-      .pipe(
-        tap((response) => {
-          ctx.patchState({
-            word: response,
-          });
-        })
-      );
+    return this.wordService.get(action.id).pipe(
+      tap((response) => {
+        ctx.patchState({
+          word: response,
+        });
+      })
+    );
   }
 
   @Action(Word.Add)
   Add(ctx: StateContext<WordStateModel>, action: Word.Add) {
-      return this.wordService.create(action.payload);
+    return this.wordService.create(action.payload);
   }
 
   @Action(Word.Edit)
   Edit(ctx: StateContext<WordStateModel>, action: Word.Edit) {
-      return this.wordService.update(action.payload);
+    return this.wordService.update(action.payload);
   }
 
   @Action(Word.Delete)
   Delete(ctx: StateContext<WordStateModel>, action: Word.Delete) {
-      return this.wordService.delete(action.id);
+    return this.wordService.delete(action.id);
   }
 }
-
