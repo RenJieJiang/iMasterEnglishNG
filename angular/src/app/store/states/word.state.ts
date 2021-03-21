@@ -4,9 +4,9 @@ import { throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import {
   WordDtoPagedResultDto,
-  WordDto,
   WordServiceProxy as WordService,
-} from "@app/services/word.service";
+} from "@app/services/word/word.service";
+import WordDto from '@app/services/word/word.model';
 import { Word } from "@app/store/actions/word.actions";
 
 export class WordStateModel {

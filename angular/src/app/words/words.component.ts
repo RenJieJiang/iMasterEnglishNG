@@ -8,9 +8,9 @@ import {
 } from '@shared/paged-listing-component-base';
 import {
   WordServiceProxy,
-  WordDto,
   WordDtoPagedResultDto
-} from '../services/word.service';
+} from '../services/word/word.service';
+import WordDto from '@app/services/word/word.model';
 import { CreateWordDialogComponent } from './create-word/create-word-dialog.component';
 import { EditWordDialogComponent } from './edit-word/edit-word-dialog.component';
 import { Select, Store } from '@ngxs/store';

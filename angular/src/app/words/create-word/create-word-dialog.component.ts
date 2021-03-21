@@ -8,17 +8,15 @@ import {
 import { finalize,take,mergeMap, switchMap } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
-import {
-  WordServiceProxy,
-  WordDto,
-  CreateWordDto,
-} from '../../services/word.service';
+import { WordServiceProxy } from '../../services/word/word.service';
 import { forEach as _forEach, map as _map } from 'lodash-es';
 import { interval,of, timer } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Word } from '@app/store/actions/word.actions';
 import { WordState } from '@app/store/states/word.state';
 import { Observable } from 'rxjs';
+import WordDto from '@app/services/word/word.model';
+
 @Component({
   templateUrl: 'create-word-dialog.component.html'
 })
@@ -46,7 +44,7 @@ export class CreateWordDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    const word = new CreateWordDto();
+    const word = new WordDto();
     word.init(this.word);
 
     this.store

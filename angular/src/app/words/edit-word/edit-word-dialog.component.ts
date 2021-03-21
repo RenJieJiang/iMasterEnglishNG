@@ -9,15 +9,12 @@ import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
-import {
-  WordServiceProxy,
-  WordDto,
-  WordEditDto,
-} from '../../services/word.service';
+import { WordServiceProxy } from '../../services/word/word.service';
 import { Select, Store } from '@ngxs/store';
 import { Word } from '@app/store/actions/word.actions';
 import { WordState } from '@app/store/states/word.state';
 import { Observable } from 'rxjs';
+import WordDto from '@app/services/word/word.model';
 
 @Component({
   templateUrl: 'edit-word-dialog.component.html'
