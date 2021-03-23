@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iMasterEnglishNG.EntityFrameworkCore;
 
 namespace iMasterEnglishNG.Migrations
 {
     [DbContext(typeof(iMasterEnglishNGDbContext))]
-    partial class iMasterEnglishNGDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210323131606_drop_table_word")]
+    partial class drop_table_word
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1510,66 +1512,6 @@ namespace iMasterEnglishNG.Migrations
                     b.HasIndex("TenantId", "NormalizedUserName");
 
                     b.ToTable("AbpUsers");
-                });
-
-            modelBuilder.Entity("iMasterEnglishNG.Entities.WordEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Antonym")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Definition")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Frequency")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("PhoneticSymbol")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Synonym")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Word")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Words");
                 });
 
             modelBuilder.Entity("iMasterEnglishNG.MultiTenancy.Tenant", b =>

@@ -5,7 +5,7 @@ using Abp.Application.Services;
 
 namespace iMasterEnglishNG.Words
 {
-    public interface IWordAppService : IAsyncCrudAppService<WordDto, long, WordPagedInput, WordCreateInput, WordUpdateInput>
+    public interface IWordAppService : IAsyncCrudAppService<WordDto, int, WordPagedInput, WordCreateInput, WordUpdateInput>
     {
 
     }

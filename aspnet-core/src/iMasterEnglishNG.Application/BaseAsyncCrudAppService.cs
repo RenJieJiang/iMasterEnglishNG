@@ -14,15 +14,15 @@ using iMasterEnglishNG.Entities;
 
 namespace iMasterEnglishNG
 {
-    public abstract class BaseAsyncCrudAppService<TEntity, TEntityDto, TSearchInput, TCreateInput, TUpdateInput> : AsyncCrudAppService<TEntity, TEntityDto, long, TSearchInput, TCreateInput, TUpdateInput>, IBaseAsyncCrudAppService<TEntityDto, TSearchInput, TCreateInput, TUpdateInput>
+    public abstract class BaseAsyncCrudAppService<TEntity, TEntityDto, TSearchInput, TCreateInput, TUpdateInput> : AsyncCrudAppService<TEntity, TEntityDto, int, TSearchInput, TCreateInput, TUpdateInput>, IBaseAsyncCrudAppService<TEntityDto, TSearchInput, TCreateInput, TUpdateInput>
         where TEntity : BaseEntity
-        where TEntityDto : FullAuditedEntityDto<long>, new()
+        where TEntityDto : FullAuditedEntityDto<int>, new()
         where TSearchInput : PagedResultRequestDto
         where TCreateInput : class, new()
-        where TUpdateInput : class, IEntityDto<long>
+        where TUpdateInput : class, IEntityDto<int>
     {
 
-        protected BaseAsyncCrudAppService(IRepository<TEntity, long> repository) : base(repository)
+        protected BaseAsyncCrudAppService(IRepository<TEntity, int> repository) : base(repository)
         {
 
         }
@@ -37,6 +37,11 @@ namespace iMasterEnglishNG
                 if (!sortInput.Sorting.IsNullOrWhiteSpace())
                 {
                     return query.OrderBy(sortInput.Sorting);
+                }
+                //Sort by word by default 
+                else if (string.IsNullOrWhiteSpace(sortInput.Sorting))
+                {
+                    return query.OrderBy("word asc");
                 }
             }
 

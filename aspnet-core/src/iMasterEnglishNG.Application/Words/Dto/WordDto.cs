@@ -8,7 +8,7 @@ using iMasterEnglishNG.Entities;
 namespace iMasterEnglishNG.Words
 {
     [AutoMapFrom(typeof(WordEntity))]
-    public class WordDto : FullAuditedEntityDto<long>
+    public class WordDto : FullAuditedEntityDto<int>
     {
         public string Word { get; set; }
 
@@ -23,5 +23,7 @@ namespace iMasterEnglishNG.Words
         public string Antonym { get; set; }
 
         public string Remarks { get; set; }
+
+        public string CreatedDate { get; set; }
     }
 }

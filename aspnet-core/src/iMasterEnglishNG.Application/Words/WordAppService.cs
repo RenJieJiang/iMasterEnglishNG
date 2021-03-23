@@ -7,20 +7,25 @@ using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
 using iMasterEnglishNG.Entities;
+using iMasterEnglishNG.EntityFrameworkCore;
 
 namespace iMasterEnglishNG.Words
 {
     public class WordAppService : BaseAsyncCrudAppService<WordEntity, WordDto, WordPagedInput, WordCreateInput, WordUpdateInput>, IWordAppService
     {
-        public WordAppService(IRepository<WordEntity, long> repository) : base(repository)
-        {
+        private IRepository<WordEntity> _repository;
 
+        public WordAppService(IRepository<WordEntity> repository) : base(repository)
+        {
+            _repository = repository;
         }
 
-        protected async Task<PagedResultDto<WordDto>> GetFilteredQuery(WordPagedInput input)
+        [UnitOfWork(isTransactional: false)]
+        public async Task<PagedResultDto<WordDto>> GetFilteredQuery(WordPagedInput input)
         {
             var query = from o in ApplySorting(CreateFilteredQuery(input), input)
                         select new WordDto
@@ -32,10 +37,13 @@ namespace iMasterEnglishNG.Words
                             Definition = o.Definition,
                             Synonym = o.Synonym,
                             Antonym = o.Antonym,
-                            Remarks = o.Remarks
+                            Remarks = o.Remarks,
+                            CreatedDate = o.CreationTime.ToString("yyyy-MM-dd")
                         };
 
-            return await GetPagedResult(query, input);
+            var result = await GetPagedResult(query, input);
+
+            return result;
         }
 
         protected override IQueryable<WordEntity> CreateFilteredQuery(WordPagedInput input)
@@ -44,7 +52,21 @@ namespace iMasterEnglishNG.Words
                 .WhereIf(!input.Word.IsNullOrWhiteSpace(), x => x.Word.Contains(input.Word)
                         || x.PhoneticSymbol.Contains(input.Word)
                         || x.Definition.Contains(input.Word)
+                        || iMasterEnglishNGDbContext.FormatDate(x.CreationTime).Contains(input.Word)
                         || (Regex.IsMatch(input.Word, @"^\d+$") && x.Frequency == int.Parse(input.Word.Trim())));
+
+            //var query = (from w in _repository.GetAll()
+            //             let createdDate = iMasterEnglishNGDbContext.FormatDate(w.CreationTime)
+            //             where (input.Word.IsNullOrWhiteSpace()
+            //                || (w.Word.Contains(input.Word)
+            //                    || w.PhoneticSymbol.Contains(input.Word)
+            //                    || w.Definition.Contains(input.Word)
+            //                    || createdDate.Contains(input.Word)
+            //                    || (Regex.IsMatch(input.Word, @"^\d+$") && w.Frequency == int.Parse(input.Word.Trim()))
+            //                   ))
+            //             select w);
+
+            //return query;
         }
     }
 }

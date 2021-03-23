@@ -41,6 +41,7 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
     { name: 'frequency', minxWidth: 50, maxWidth: 100 },
     { name: 'phoneticSymbol', minxWidth: 100, maxWidth: 200 },
     { name: 'definition' },
+    { name: 'createdDate'},
     { name: 'Actions', prop: 'Id' }
   ];
 

@@ -8,12 +8,12 @@ using iMasterEnglishNG.Entities;
 namespace iMasterEnglishNG.Words
 {
     [AutoMapTo(typeof(WordEntity))]
-    public class WordUpdateInput : IEntityDto<long>
+    public class WordUpdateInput : IEntityDto<int>
     {
         /// <summary>
         /// PK
         /// </summary>
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public string Word { get; set; }
 

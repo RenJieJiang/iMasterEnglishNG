@@ -59,24 +59,30 @@
             (page)="getDataPage($event.offset+1)"
             (sort)="sortChange($event)"
           >
-            <ngx-datatable-column name="word" sortable="true" prop="word">
+            <ngx-datatable-column name="Word" sortable="true" prop="word">
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="frequency"
+              name="Frequency"
               sortable="true"
               prop="frequency"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="phoneticSymbol"
+              name="Phonetic Symbol"
               sortable="false"
               prop="phoneticSymbol"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="definition"
+              name="Definition"
               sortable="true"
               prop="definition"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Created Date"
+              sortable="true"
+              prop="createdDate"
             >
             </ngx-datatable-column>
             <ngx-datatable-column name="Actions" sortable="false" prop="id">

@@ -7,11 +7,11 @@ using Abp.Application.Services.Dto;
 namespace iMasterEnglishNG
 {
     public interface IBaseAsyncCrudAppService<TEntityDto, TSearchInput, TCreateInput, TUpdateInput>
-        : IAsyncCrudAppService<TEntityDto, long, TSearchInput, TCreateInput, TUpdateInput>
-        where TEntityDto : FullAuditedEntityDto<long>
+        : IAsyncCrudAppService<TEntityDto, int, TSearchInput, TCreateInput, TUpdateInput>
+        where TEntityDto : FullAuditedEntityDto<int>
         where TSearchInput : PagedResultRequestDto
         where TCreateInput : class, new()
-        where TUpdateInput : IEntityDto<long>
+        where TUpdateInput : IEntityDto<int>
     {
 
     }

@@ -246,7 +246,7 @@ export class WordServiceProxy {
      * @return Success
      */
     getAll(word: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SearchResult<WordDto>> {
-        let url_ = this.baseUrl + "/api/services/app/Word/GetAll?";
+        let url_ = this.baseUrl + "/api/services/app/Word/GetFilteredQuery?";
         if (word === null)
             throw new Error("The parameter 'word' cannot be null.");
         else if (word !== undefined)
@@ -302,7 +302,6 @@ export class WordServiceProxy {
             searchResult.items = resultData200["items"];
             searchResult.totalCount = resultData200["totalCount"];
             result200 = searchResult;
-            console.log(result200);
             return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {

@@ -5,7 +5,7 @@ using Abp.Domain.Entities.Auditing;
 
 namespace iMasterEnglishNG.Entities
 {
-    public class BaseEntity : FullAuditedEntity<long>
+    public class BaseEntity : FullAuditedEntity<int>
     {
 
     }

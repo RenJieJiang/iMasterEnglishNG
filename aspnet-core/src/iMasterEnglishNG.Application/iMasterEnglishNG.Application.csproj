@@ -12,5 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\iMasterEnglishNG.Core\iMasterEnglishNG.Core.csproj" />
+    <ProjectReference Include="..\iMasterEnglishNG.EntityFrameworkCore\iMasterEnglishNG.EntityFrameworkCore.csproj" />
   </ItemGroup>
 </Project>
