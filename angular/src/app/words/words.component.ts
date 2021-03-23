@@ -17,6 +17,8 @@ import { Observable } from "rxjs";
 import { analyzeAndValidateNgModules } from "@angular/compiler";
 import { NgxPaginationModule } from "ngx-pagination";
 import SearchResult from "@app/shared/model/search-result";
+import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
+import { words } from "lodash";
 
 class PagedWordsRequestDto extends PagedRequestDto {
   word: string;
@@ -25,6 +27,7 @@ class PagedWordsRequestDto extends PagedRequestDto {
 @Component({
   templateUrl: "./words.component.html",
   animations: [appModuleAnimation()],
+  styleUrls: ['./words.component.scss']
 })
 export class WordsComponent extends PagedListingComponentBase<WordDto> {
   @Select(WordState.getWords)
@@ -32,6 +35,19 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
 
   words: WordDto[] = [];
   word = "";
+
+  columns = [
+    { prop: 'word', minxWidth: 100, maxWidth: 200 },
+    { name: 'frequency', minxWidth: 50, maxWidth: 100 },
+    { name: 'phoneticSymbol', minxWidth: 100, maxWidth: 200 },
+    { name: 'definition' },
+    { name: 'Actions', prop: 'Id' }
+  ];
+
+  loadingIndicator:boolean = true;
+  reorderable:boolean = true;
+  SortType = SortType;
+  ColumnMode = ColumnMode;
 
   constructor(
     injector: Injector,
@@ -87,8 +103,8 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
     this.showCreateOrEditWordDialog();
   }
 
-  editWord(word: WordDto): void {
-    this.showCreateOrEditWordDialog(word.id);
+  editWord(id: number): void {
+    this.showCreateOrEditWordDialog(id);
   }
 
   showCreateOrEditWordDialog(id?: number): void {

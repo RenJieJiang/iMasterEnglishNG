@@ -245,12 +245,14 @@ export class WordServiceProxy {
      * @param maxResultCount (optional)
      * @return Success
      */
-    getAll(word: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SearchResult<WordDto>> {
+    getAll(word: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SearchResult<WordDto>> {
         let url_ = this.baseUrl + "/api/services/app/Word/GetAll?";
         if (word === null)
             throw new Error("The parameter 'word' cannot be null.");
         else if (word !== undefined)
             url_ += "Word=" + encodeURIComponent("" + word) + "&";
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (skipCount === null)
             throw new Error("The parameter 'skipCount' cannot be null.");
         else if (skipCount !== undefined)

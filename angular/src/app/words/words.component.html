@@ -38,78 +38,72 @@
             />
           </div>
         </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap" [busy]="isTableLoading">
-            <thead class="bg-light">
-              <tr>
-                <th>{{ "Word" | localize }}</th>
-                <th>{{ "Frequency" | localize }}</th>
-                <th>{{ "PhoneticSymbol" | localize }}</th>
-                <th>{{ "Definition" | localize }}</th>
-                <th style="width: 200px;">{{ "Actions" | localize }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="
-                  let word of words
-                    | paginate
-                      : {
-                          id: 'server',
-                          itemsPerPage: pageSize,
-                          currentPage: pageNumber,
-                          totalItems: totalItems
-                        }
-                "
+        <div>
+          <ngx-datatable
+            class="bootstrap"
+            [rows]="words"
+            [loadingIndicator]="loadingIndicator"
+            [sortType]="SortType.single"
+            [columns]="columns"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="40"
+            [footerHeight]="50"
+            [limit]="10"
+            rowHeight="auto"
+            [reorderable]="reorderable"
+            [externalPaging]="true"
+            [externalSorting]="true"
+            [count]="totalItems"
+            [offset]="pageNumber-1"
+            [limit]="pageSize"
+            (page)="getDataPage($event.offset+1)"
+            (sort)="sortChange($event)"
+          >
+            <ngx-datatable-column name="word" sortable="true" prop="word">
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="frequency"
+              sortable="true"
+              prop="frequency"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="phoneticSymbol"
+              sortable="false"
+              prop="phoneticSymbol"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="definition"
+              sortable="true"
+              prop="definition"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Actions" sortable="false" prop="id">
+              <ng-template
+                let-row="row"
+                let-value="value"
+                ngx-datatable-cell-template
               >
-                <td>{{ word.word }}</td>
-                <td>{{ word.frequency }}</td>
-                <td>{{ word.phoneticSymbol }}</td>
-                <td>{{ word.definition }}</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-sm bg-secondary"
-                    (click)="editWord(word)"
-                  >
-                    <i class="fas fa-pencil-alt"></i>
-                    {{ "Edit" | localize }}
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-sm bg-danger mx-2"
-                    (click)="delete(word)"
-                  >
-                    <i class="fas fa-trash"></i>
-                    {{ "Delete" | localize }}
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card-footer bg-light border-top">
-          <div class="row">
-            <div class="col-sm-4 col-12 text-sm-left text-center">
-              <button class="btn btn-secondary" (click)="refresh()">
-                <i class="fas fa-redo-alt"></i>
-              </button>
-            </div>
-            <div class="col-sm-4 col-12 text-center">
-              <p class="mb-0 my-2">
-                {{ "TotalRecordsCount" | localize: totalItems }}
-              </p>
-            </div>
-            <div class="col-sm-4 col-12">
-              <div class="float-sm-right m-auto">
-                <abp-pagination-controls
-                  id="server"
-                  (pageChange)="getDataPage($event)"
+                <button
+                  type="button"
+                  class="btn btn-sm bg-secondary"
+                  (click)="editWord(value)"
                 >
-                </abp-pagination-controls>
-              </div>
-            </div>
-          </div>
+                  <i class="fas fa-pencil-alt"></i>
+                  {{ "Edit" | localize }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-sm bg-danger mx-2"
+                  (click)="delete(value)"
+                >
+                  <i class="fas fa-trash"></i>
+                  {{ "Delete" | localize }}
+                </button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
         </div>
       </div>
     </div>

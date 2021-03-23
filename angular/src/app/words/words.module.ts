@@ -7,6 +7,7 @@ import { WordsRoutingModule } from "./words-routing.module";
 import { WordsComponent } from "./words.component";
 import { CreateWordDialogComponent } from "./create-word/create-word-dialog.component";
 import { EditWordDialogComponent } from "./edit-word/edit-word-dialog.component";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EditWordDialogComponent } from "./edit-word/edit-word-dialog.component"
     FormsModule,
     CommonModule,
     NgxPaginationModule,
+    NgxDatatableModule
   ],
 })
 export class WordsModule {}

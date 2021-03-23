@@ -37,6 +37,7 @@ export class WordState {
     return this.wordService
       .getAll(
         action.payload.word,
+        action.payload.sorting,
         action.payload.skipCount,
         action.payload.maxResultCount
       )
