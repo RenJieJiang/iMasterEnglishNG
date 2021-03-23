@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
@@ -40,7 +41,10 @@ namespace iMasterEnglishNG.Words
         protected override IQueryable<WordEntity> CreateFilteredQuery(WordPagedInput input)
         {
             return base.CreateFilteredQuery(input)
-                .WhereIf(!input.Word.IsNullOrWhiteSpace(), x => x.Word.Contains(input.Word));
+                .WhereIf(!input.Word.IsNullOrWhiteSpace(), x => x.Word.Contains(input.Word)
+                        || x.PhoneticSymbol.Contains(input.Word)
+                        || x.Definition.Contains(input.Word)
+                        || (Regex.IsMatch(input.Word, @"^\d+$") && x.Frequency == int.Parse(input.Word.Trim())));
         }
     }
 }
