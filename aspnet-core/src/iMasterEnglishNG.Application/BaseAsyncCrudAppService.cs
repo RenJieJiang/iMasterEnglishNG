@@ -38,11 +38,6 @@ namespace iMasterEnglishNG
                 {
                     return query.OrderBy(sortInput.Sorting);
                 }
-                //Sort by word by default 
-                else if (string.IsNullOrWhiteSpace(sortInput.Sorting))
-                {
-                    return query.OrderBy("word asc");
-                }
             }
 
             //TODO: later can support this feature as a default sorting

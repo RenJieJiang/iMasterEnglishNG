@@ -24,6 +24,6 @@ namespace iMasterEnglishNG.Words
 
         public string Remarks { get; set; }
 
-        public string CreatedDate { get; set; }
+        public string FormattedCreationTime { get; set; }
     }
 }

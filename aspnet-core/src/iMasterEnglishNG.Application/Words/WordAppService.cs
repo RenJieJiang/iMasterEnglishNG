@@ -27,6 +27,17 @@ namespace iMasterEnglishNG.Words
         [UnitOfWork(isTransactional: false)]
         public async Task<PagedResultDto<WordDto>> GetFilteredQuery(WordPagedInput input)
         {
+            //Sort by word by default 
+            var sortInput = input as ISortedResultRequest;
+            if (sortInput != null)
+            {
+                if (string.IsNullOrWhiteSpace(sortInput.Sorting))
+                    sortInput.Sorting = "word asc";
+                //handle FormattedCreationTime sorting
+                else if (sortInput.Sorting.Contains("formattedCreationTime"))
+                    sortInput.Sorting = sortInput.Sorting.Replace("formattedCreationTime", "CreationTime");
+            }
+
             var query = from o in ApplySorting(CreateFilteredQuery(input), input)
                         select new WordDto
                         {
@@ -38,7 +49,7 @@ namespace iMasterEnglishNG.Words
                             Synonym = o.Synonym,
                             Antonym = o.Antonym,
                             Remarks = o.Remarks,
-                            CreatedDate = o.CreationTime.ToString("yyyy-MM-dd")
+                            FormattedCreationTime = o.CreationTime.ToString("yyyy-MM-dd")
                         };
 
             var result = await GetPagedResult(query, input);

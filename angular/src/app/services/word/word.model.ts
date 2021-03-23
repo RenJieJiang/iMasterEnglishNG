@@ -9,7 +9,7 @@ export default class WordDto implements IWordDto {
   antonym: string | undefined;
   remarks: string | undefined;
   grantedPermissions: string[] | undefined;
-  createdDate: string | undefined;
+  FormattedCreationTime: string | undefined;
   id: number;
 
   constructor(data?: IWordDto) {
