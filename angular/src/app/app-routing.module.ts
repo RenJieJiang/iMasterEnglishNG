@@ -9,6 +9,7 @@ import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { WordsComponent } from './words/words.component';
+import { ChildOneComponent } from './words/child-one/child-one.component';
 
 @NgModule({
     imports: [
@@ -17,16 +18,16 @@ import { WordsComponent } from './words/words.component';
                 path: '',
                 component: AppComponent,
                 children: [
-                    { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
-                    { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
-                    { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
-                    { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
-                    { path: 'about', component: AboutComponent },
-                    { path: 'update-password', component: ChangePasswordComponent },
+                    { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard], data: { breadcrumb: 'Home' }},
+                    { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users', breadcrumb: 'Users' }, canActivate: [AppRouteGuard] },
+                    { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles', breadcrumb: 'Roles' }, canActivate: [AppRouteGuard] },
+                    { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants', breadcrumb: 'Tenants' }, canActivate: [AppRouteGuard] },
+                    { path: 'about', component: AboutComponent, data: { breadcrumb: 'About' } },
+                    { path: 'update-password', component: ChangePasswordComponent, data: { breadcrumb: 'Update Password' } },
                     {
                         path: 'words',
                         loadChildren: () => import('app/words/words.module').then(m => m.WordsModule), // Lazy load WordsModule
-                        data: { preload: true }
+                        data: { breadcrumb: {alias: '@Words'} }
                     }
                 ]
             },

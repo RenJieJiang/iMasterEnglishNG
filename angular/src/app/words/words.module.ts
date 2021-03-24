@@ -8,12 +8,16 @@ import { WordsComponent } from "./words.component";
 import { CreateWordDialogComponent } from "./create-word/create-word-dialog.component";
 import { EditWordDialogComponent } from "./edit-word/edit-word-dialog.component";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ChildOneComponent } from './child-one/child-one.component';
+import { MatIconModule } from '@angular/material/icon';
+import {BreadcrumbModule} from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [
     WordsComponent,
     CreateWordDialogComponent,
     EditWordDialogComponent,
+    ChildOneComponent,
   ],
   imports: [
     SharedModule,
@@ -21,7 +25,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FormsModule,
     CommonModule,
     NgxPaginationModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    MatIconModule,
+    BreadcrumbModule
   ],
 })
 export class WordsModule {}

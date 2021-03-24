@@ -43,6 +43,7 @@
     "ts-helpers": "^1.1.2",
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",
+    "xng-breadcrumb": "^6.6.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

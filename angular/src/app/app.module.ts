@@ -41,6 +41,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 import { WordState } from './store/states/word.state';
 import { NgxsModule } from '@ngxs/store';
 import { MaterialModule } from "../material.module";
+import {BreadcrumbModule} from 'xng-breadcrumb';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { MaterialModule } from "../material.module";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    BreadcrumbModule,
     HttpClientModule,
     HttpClientJsonpModule,
     ModalModule.forChild(),
@@ -89,7 +92,7 @@ import { MaterialModule } from "../material.module";
     NgxPaginationModule,
     NgxsModule.forRoot([WordState])
   ],
-  providers: [],
+  providers: [BreadcrumbService],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,

@@ -19,6 +19,9 @@ import { NgxPaginationModule } from "ngx-pagination";
 import SearchResult from "@app/shared/model/search-result";
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { words } from "lodash";
+import { Router } from '@angular/router';
+import { basename } from "path";
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 class PagedWordsRequestDto extends PagedRequestDto {
   word: string;
@@ -54,9 +57,16 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
     injector: Injector,
     private _wordsService: WordServiceProxy,
     private _modalService: BsModalService,
-    private store: Store
+    private store: Store,
+    private router: Router,
+    private breadcrumbService: BreadcrumbService
   ) {
     super(injector);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.breadcrumbService.set('@Words', 'Words');
   }
 
   list(
@@ -132,5 +142,9 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
     createOrEditWordDialog.content.onSave.subscribe(() => {
       this.refresh();
     });
+  }
+
+  checkRouteUrl() {
+    return this.router.url == '/app/words';
   }
 }

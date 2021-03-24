@@ -1,9 +1,21 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { WordsComponent } from './words.component';
-//import { ApplicationLayoutComponent } from '@abp/ng.theme.basic';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { WordsComponent } from "./words.component";
+import { ChildOneComponent } from "./child-one/child-one.component";
 
-const routes: Routes = [{ path: '', component: WordsComponent }];
+const routes: Routes = [
+  {
+    path: "",
+    component: WordsComponent,
+    children: [
+      {
+        path: "child-one",
+        component: ChildOneComponent,
+        data: { breadcrumb: {alias: 'ChildOne'} },
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
