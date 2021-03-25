@@ -60,7 +60,7 @@ export class EditWordDialogComponent extends AppComponentBase implements OnInit 
     word.init(this.word);
 
     this.store
-    .dispatch(new Word.Edit(this.word))
+    .dispatch(new Word.Edit(word))
     .pipe(
       finalize(() => {
         this.saving = false;
