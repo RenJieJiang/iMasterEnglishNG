@@ -11,6 +11,18 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChildOneComponent } from './child-one/child-one.component';
 import { MatIconModule } from '@angular/material/icon';
 import {BreadcrumbModule} from 'xng-breadcrumb';
+import { CarouselModule } from "ngx-bootstrap/carousel";
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {DropdownModule} from 'primeng/dropdown';
+import {CheckboxModule} from 'primeng/checkbox';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {CardModule} from 'primeng/card';
+import {SplitButtonModule} from 'primeng/splitbutton';
+import {SplitterModule} from 'primeng/splitter';
+import {TabViewModule} from 'primeng/tabview';
+import {ToolbarModule} from 'primeng/toolbar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {PanelModule} from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -20,6 +32,8 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
     ChildOneComponent,
   ],
   imports: [
+    BsDatepickerModule.forRoot(),
+    CarouselModule.forRoot(),
     SharedModule,
     WordsRoutingModule,
     FormsModule,
@@ -27,7 +41,17 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
     NgxPaginationModule,
     NgxDatatableModule,
     MatIconModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    DropdownModule,
+    CheckboxModule,
+    RadioButtonModule,
+    CardModule,
+    SplitButtonModule,
+    SplitterModule,
+    TabViewModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+    PanelModule
   ],
 })
 export class WordsModule {}

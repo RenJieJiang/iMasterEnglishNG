@@ -1,5 +1,271 @@
-
 <div *ngIf="checkRouteUrl()">
-  <p>child-one works!</p>
-</div>
+  <section>
+    <h5>
+      <span><b>This is a section with flex style</b></span>
+    </h5>
+  </section>
+  <section>
+    <div class="Column">row1.column1</div>
+    <div class="Column">row1.column2</div>
+    <div class="Column">row1.column3</div>
+    <div class="Column">row1.column4</div>
+  </section>
+  <section>
+    <div class="Column">row2.column1</div>
+    <div class="Column">row2.column2</div>
+    <div class="Column">row2.column3</div>
+    <div class="Column">row2.column4</div>
+  </section>
 
+  <section>
+    <div>
+      <h2>First article</h2>
+      <p>
+        Tacos actually microdosing, pour-over semiotics banjo chicharrones retro
+        fanny pack portland everyday carry vinyl typewriter. Tacos PBR&B pork
+        belly, everyday carry ennui pickled sriracha normcore hashtag polaroid
+        single-origin coffee cold-pressed. PBR&B tattooed trust fund twee,
+        leggings salvia iPhone photo booth health goth gastropub hammock.
+      </p>
+    </div>
+
+    <div>
+      <h2>Second article</h2>
+      <p>
+        Tacos actually microdosing, pour-over semiotics banjo chicharrones retro
+        fanny pack portland everyday carry vinyl typewriter. Tacos PBR&B pork
+        belly, everyday carry ennui pickled sriracha normcore hashtag polaroid
+        single-origin coffee cold-pressed. PBR&B tattooed trust fund twee,
+        leggings salvia iPhone photo booth health goth gastropub hammock.
+      </p>
+    </div>
+
+    <div>
+      <h2>Third article</h2>
+      <p>
+        Tacos actually microdosing, pour-over semiotics banjo chicharrones retro
+        fanny pack portland everyday carry vinyl typewriter. Tacos PBR&B pork
+        belly, everyday carry ennui pickled sriracha normcore hashtag polaroid
+        single-origin coffee cold-pressed. PBR&B tattooed trust fund twee,
+        leggings salvia iPhone photo booth health goth gastropub hammock.
+      </p>
+      <!-- <p>
+        Cray food truck brunch, XOXO +1 keffiyeh pickled chambray waistcoat
+        ennui. Organic small batch paleo 8-bit. Intelligentsia umami wayfarers
+        pickled, asymmetrical kombucha letterpress kitsch leggings cold-pressed
+        squid chartreuse put a bird on it. Listicle pickled man bun cornhole
+        heirloom art party.
+      </p> -->
+    </div>
+  </section>
+
+  <section>
+    <button type="button" class="btn btn-primary">Button</button>
+    <p-splitButton
+      label="Save"
+      icon="pi pi-plus"
+      (onClick)="save('info')"
+      [model]="items"
+    ></p-splitButton>
+    <p-confirmDialog
+      [style]="{ width: '50vw' }"
+      [baseZIndex]="10000"
+      rejectButtonStyleClass="p-button-text"
+    ></p-confirmDialog>
+    <p-button
+      (click)="confirm1()"
+      icon="pi pi-check"
+      label="Confirm"
+      styleClass="p-mr-2"
+    ></p-button>
+    <div class="oneline">
+      <input
+        type="text"
+        class="form-control"
+        #dp="bsDatepicker"
+        bsDatepicker
+        [bsValue]="bsValue"
+      />
+      <button
+        class="btn btn-success"
+        (click)="dp.toggle()"
+        [attr.aria-expanded]="dp.isOpen"
+        type="button"
+      >
+        Date Picker
+      </button>
+    </div>
+    <div style="border: 0; width: 250px">
+      <p-dropdown
+        [options]="cities"
+        [(ngModel)]="selectedCity"
+        optionLabel="name"
+      ></p-dropdown>
+      <label *ngIf="selectedCityName" style="margin-left: 20px"
+        >selected {{ selectedCityName }}</label
+      >
+    </div>
+    <div class="p-field-checkbox" style="border: 0; width: 100px">
+      <p-checkbox
+        [(ngModel)]="checked"
+        binary="true"
+        inputId="binary"
+      ></p-checkbox>
+      <label for="binary">{{ checked }}</label>
+    </div>
+  </section>
+  <section style="justify-content: flex-start"></section>
+  <p-panel header="Toolbar">
+    <div class="p-text-italic">
+      Toolbar is a grouping component for buttons and other content.
+    </div>
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <p-button label="New" icon="pi pi-plus" class="p-mr-2"></p-button>
+        <p-button
+          label="Upload"
+          icon="pi pi-upload"
+          styleClass="p-button-success"
+        ></p-button>
+
+        <i
+          class="p-toolbar-separator pi pi-bars p-mr-2"
+          style="vertical-align: middle"
+        ></i>
+
+        <p-splitButton
+          label="Save"
+          icon="pi pi-check"
+          [model]="items"
+          styleClass="p-button-warning"
+        ></p-splitButton>
+      </div>
+
+      <div class="p-toolbar-group-right">
+        <p-button icon="pi pi-search" class="p-mr-2"></p-button>
+        <p-button
+          icon="pi pi-calendar"
+          styleClass="p-button-success p-mr-2"
+        ></p-button>
+        <p-button icon="pi pi-times" styleClass="p-button-danger"></p-button>
+      </div>
+    </p-toolbar>
+  </p-panel>
+  <p-card
+    header="Simple Card"
+    [style]="{ width: '50rem', 'margin-bottom': '1em' }"
+  >
+    <div style="flex-direction: column; border: 0">
+      <div style="border: 0">
+        <label for="city1">Chicago</label>
+        <p-radioButton
+          name="city"
+          value="Chicago"
+          [(ngModel)]="city"
+          inputId="city1"
+        ></p-radioButton>
+        <label for="city2">Los Angeles</label>
+        <p-radioButton
+          name="city"
+          value="Los Angeles"
+          [(ngModel)]="city"
+          inputId="city2"
+        ></p-radioButton>
+      </div>
+      <label *ngIf="city">{{ city }} selected</label>
+    </div>
+  </p-card>
+  <div class="card">
+    <h5>TabView</h5>
+    <p-tabView>
+      <p-tabPanel header="Header I">
+        <div class="card">
+          <h5>Nested Splitter</h5>
+          <p-splitter
+            [style]="{ height: '150px' }"
+            [panelSizes]="[20, 80]"
+            [minSizes]="[10, 0]"
+            styleClass="p-mb-5"
+          >
+            <ng-template pTemplate>
+              <div class="p-col p-d-flex p-ai-center p-jc-center"></div>
+            </ng-template>
+            <ng-template pTemplate>
+              <p-splitter layout="vertical" [panelSizes]="[15, 85]">
+                <ng-template pTemplate>
+                  <div
+                    style="flex-grow: 1"
+                    class="p-d-flex p-ai-center p-jc-center"
+                  >
+                    Panel 2
+                  </div>
+                </ng-template>
+                <ng-template pTemplate>
+                  <p-splitter [panelSizes]="[20, 80]">
+                    <ng-template pTemplate>
+                      <div class="p-col p-d-flex p-ai-center p-jc-center">
+                        Panel 3
+                      </div>
+                    </ng-template>
+                    <ng-template pTemplate>
+                      <div class="p-col p-d-flex p-ai-center p-jc-center">
+                        Panel 4
+                      </div>
+                    </ng-template>
+                  </p-splitter>
+                </ng-template>
+              </p-splitter>
+            </ng-template>
+          </p-splitter>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Header II">
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+          ab illo inventore veritatis et quasi architecto beatae vitae dicta
+          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+          qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit,
+          sed quia non numquam eius modi.
+        </p>
+      </p-tabPanel>
+      <p-tabPanel header="Header III">
+        <p>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui
+          blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+          et quas molestias excepturi sint occaecati cupiditate non provident,
+          similique sunt in culpa qui officia deserunt mollitia animi, id est
+          laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+          distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+          cumque nihil impedit quo minus.
+        </p>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <section>
+    <carousel>
+      <slide>
+        <img
+          src="assets/img/1.jpg"
+          alt="first slide"
+          style="display: block; width: 100%"
+        />
+      </slide>
+      <slide>
+        <img
+          src="assets/img/2.jpg"
+          alt="second slide"
+          style="display: block; width: 100%"
+        />
+      </slide>
+      <slide>
+        <img
+          src="assets/img/3.jpg"
+          alt="third slide"
+          style="display: block; width: 100%"
+        />
+      </slide>
+    </carousel>
+  </section>
+</div>

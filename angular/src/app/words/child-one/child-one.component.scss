@@ -1,0 +1,26 @@
+section {
+  display: flex;
+  justify-content: space-around;
+  div{border:1px solid rgb(243, 11, 69)}
+}
+
+
+
+.leftalign {
+  justify-content:flex-start;
+}
+
+.oneline {
+  display: flex; flex-wrap: nowrap;
+}
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+.item { flex-grow: 1; }
