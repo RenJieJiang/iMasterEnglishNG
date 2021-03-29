@@ -1,7 +1,7 @@
 section {
   display: flex;
   justify-content: space-around;
-  div{border:1px solid rgb(243, 11, 69)}
+  // div{border:1px solid rgb(243, 11, 69)}
 }
 
 
@@ -24,3 +24,13 @@ section {
   height: 0;
 }
 .item { flex-grow: 1; }
+
+:host ::ng-deep .p-dropdown {
+  width: 14rem;
+}
+
+.country-item-value {
+  img.flag {
+      width: 17px;
+  }
+}

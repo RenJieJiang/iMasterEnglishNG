@@ -23,6 +23,7 @@ import {TabViewModule} from 'primeng/tabview';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {PanelModule} from 'primeng/panel';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {PanelModule} from 'primeng/panel';
     TabViewModule,
     ToolbarModule,
     ConfirmDialogModule,
-    PanelModule
+    PanelModule,
+    CalendarModule
   ],
 })
 export class WordsModule {}

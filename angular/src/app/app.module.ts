@@ -56,6 +56,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {PanelModule} from 'primeng/panel';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import {PanelModule} from 'primeng/panel';
     ToolbarModule,
     ConfirmDialogModule,
     PanelModule,
+    CalendarModule,
     CollapseModule,
     TabsModule,
     AppRoutingModule,

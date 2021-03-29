@@ -17,6 +17,8 @@ export class ChildOneComponent implements OnInit {
   cities: City[];
   selectedCity: City;
   items: MenuItem[];
+  countries: any[];
+  selectedCountry: Country;
 
   constructor(
     private router: Router,
@@ -60,6 +62,19 @@ export class ChildOneComponent implements OnInit {
       {separator: true},
       {label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup']}
   ];
+
+  this.countries = [
+    {name: 'Australia', code: 'AU'},
+    {name: 'Brazil', code: 'BR'},
+    {name: 'China', code: 'CN'},
+    {name: 'Egypt', code: 'EG'},
+    {name: 'France', code: 'FR'},
+    {name: 'Germany', code: 'DE'},
+    {name: 'India', code: 'IN'},
+    {name: 'Japan', code: 'JP'},
+    {name: 'Spain', code: 'ES'},
+    {name: 'United States', code: 'US'}
+];
   }
 
   confirm1() {
@@ -86,6 +101,11 @@ export class ChildOneComponent implements OnInit {
 }
 
 interface City {
+  name: string,
+  code: string
+}
+
+interface Country {
   name: string,
   code: string
 }
