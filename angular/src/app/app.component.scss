@@ -1,21 +1,21 @@
-
+:host ::ng-deep .xng-breadcrumb-item {
   label {
     margin-bottom: 0;
   }
+}
 
-  ol {
-    li:nth-child(1) {
-      a:nth-child(1) {
-        margin-left: 1rem;
-      }
+:host ::ng-deep ol {
+  li:nth-child(1) {
+    a:nth-child(1) {
+      margin-left: 1rem;
     }
   }
+}
 
-  ol {
-    li:nth-child(1) {
-      label:nth-child(1) {
-        margin-left: 1rem;
-      }
+:host ::ng-deep ol {
+  li:nth-child(1) {
+    label:nth-child(1) {
+      margin-left: 1rem;
     }
   }
-
+}

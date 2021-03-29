@@ -115,16 +115,19 @@
               Date Picker
             </button>
           </div> -->
-          <label for="icon">Date Time</label>
-          <p-calendar
-            [(ngModel)]="date7"
-            [showTime]="true"
-            [showIcon]="true"
-            inputId="icon"
-          ></p-calendar>
+          <div class="container-fluid">
+            <label for="icon">Date Time</label>
+            <p-calendar
+              [(ngModel)]="date7"
+              [showTime]="true"
+              [showIcon]="true"
+              inputId="icon"
+            ></p-calendar>
+          </div>
+
         </div>
         <div class="col-lg-2 col-12">
-          <div class="container-fluid">
+          <div>
             <!-- <div style="border: 0; width: 250px">
               <p-dropdown
                 [options]="cities"

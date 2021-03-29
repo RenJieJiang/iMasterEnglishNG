@@ -8,7 +8,7 @@ import { ViewEncapsulation } from '@angular/core';
 @Component({
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class AppComponent extends AppComponentBase implements OnInit {
   sidebarExpanded: boolean;
