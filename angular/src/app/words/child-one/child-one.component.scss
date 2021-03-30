@@ -25,12 +25,12 @@ section {
 }
 .item { flex-grow: 1; }
 
-:host ::ng-deep .p-dropdown {
-  width: 14rem;
-}
+// :host ::ng-deep .p-dropdown {
+//   width: 14rem;
+// }
 
-.country-item-value {
-  img.flag {
-      width: 17px;
-  }
-}
+// .country-item-value {
+//   img.flag {
+//       width: 17px;
+//   }
+// }

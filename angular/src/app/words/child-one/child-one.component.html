@@ -72,10 +72,10 @@
   <section class="container-fluid">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-2 col-12">
+        <div class="col-xl-2 col-lg-4 col-12">
           <button type="button" class="btn btn-primary">Button</button>
         </div>
-        <div class="col-lg-2 col-12">
+        <div class="col-xl-2 col-lg-4 col-12">
           <p-splitButton
             label="Save"
             icon="pi pi-plus"
@@ -83,8 +83,7 @@
             [model]="items"
           ></p-splitButton>
         </div>
-
-        <div class="col-lg-2 col-12">
+        <div class="col-xl-2 col-lg-4 col-12">
           <p-confirmDialog
             [style]="{ width: '50vw' }"
             [baseZIndex]="10000"
@@ -97,36 +96,16 @@
             styleClass="p-mr-2"
           ></p-button>
         </div>
-        <div class="col-lg-3 col-12">
-          <!-- <div class="oneline">
-            <input
-              type="text"
-              class="form-control"
-              #dp="bsDatepicker"
-              bsDatepicker
-              [bsValue]="bsValue"
-            />
-            <button
-              class="btn btn-success"
-              (click)="dp.toggle()"
-              [attr.aria-expanded]="dp.isOpen"
-              type="button"
-            >
-              Date Picker
-            </button>
-          </div> -->
-          <div class="container-fluid">
-            <label for="icon">Date Time</label>
-            <p-calendar
-              [(ngModel)]="date7"
-              [showTime]="true"
-              [showIcon]="true"
-              inputId="icon"
-            ></p-calendar>
-          </div>
-
+        <div class="col-xl-2 col-lg-4 col-12">
+          <!-- <label for="icon">DateTime</label> -->
+          <p-calendar
+            [(ngModel)]="date7"
+            [showTime]="true"
+            [showIcon]="true"
+            inputId="icon"
+          ></p-calendar>
         </div>
-        <div class="col-lg-2 col-12">
+        <div class="col-xl-3 col-lg-4 col-12">
           <div>
             <!-- <div style="border: 0; width: 250px">
               <p-dropdown
@@ -163,7 +142,7 @@
             </p-dropdown>
           </div>
         </div>
-        <div class="col-lg-1 col-12">
+        <div class="col-xl-1 col-lg-4 col-12">
           <div class="p-field-checkbox" style="border: 0; width: 100px">
             <p-checkbox
               [(ngModel)]="checked"
@@ -184,13 +163,14 @@
         </div>
         <p-toolbar>
           <div class="p-toolbar-group-left">
-            <div class="container-fluid">
+            <div class="container-fluid" style="padding-left: 0rem">
               <p-button label="New" icon="pi pi-plus" class="p-mr-2"></p-button>
               <p-button
                 label="Upload"
                 icon="pi pi-upload"
                 styleClass="p-button-success"
               ></p-button>
+
               <i
                 class="p-toolbar-separator pi pi-bars p-mr-2"
                 style="vertical-align: middle"
@@ -202,21 +182,19 @@
                 [model]="items"
                 styleClass="p-button-warning"
               ></p-splitButton>
-              <div class="p-toolbar-group-right">
-                <p-button icon="pi pi-search" class="p-mr-2"></p-button>
-                <p-button
-                  icon="pi pi-calendar"
-                  styleClass="p-button-success p-mr-2"
-                ></p-button>
-                <p-button
-                  icon="pi pi-times"
-                  styleClass="p-button-danger"
-                ></p-button>
-              </div>
             </div>
           </div>
-
-
+          <div class="p-toolbar-group-right">
+            <p-button icon="pi pi-search" class="p-mr-2"></p-button>
+            <p-button
+              icon="pi pi-calendar"
+              styleClass="p-button-success p-mr-2"
+            ></p-button>
+            <p-button
+              icon="pi pi-times"
+              styleClass="p-button-danger"
+            ></p-button>
+          </div>
         </p-toolbar>
       </p-panel>
     </div>
@@ -229,12 +207,14 @@
       >
         <div style="flex-direction: column; border: 0">
           <div style="border: 0">
-            <label for="city1">Chicago</label>
+            <label for="city1" style="margin-bottom: 0">Chicago</label>
             <p-radioButton
               name="city"
               value="Chicago"
               [(ngModel)]="city"
               inputId="city1"
+              styleClass="p-mx-2"
+              style="vertical-align: middle"
             ></p-radioButton>
             <label for="city2">Los Angeles</label>
             <p-radioButton
@@ -242,6 +222,8 @@
               value="Los Angeles"
               [(ngModel)]="city"
               inputId="city2"
+              styleClass="p-mx-2"
+              style="vertical-align: middle"
             ></p-radioButton>
           </div>
           <label *ngIf="city">{{ city }} selected</label>

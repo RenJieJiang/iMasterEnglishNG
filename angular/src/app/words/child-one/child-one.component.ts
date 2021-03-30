@@ -101,12 +101,12 @@ export class ChildOneComponent implements OnInit {
 }
 
 interface City {
-  name: string,
-  code: string
+  name: string;
+  code: string;
 }
 
-interface Country {
-  name: string,
-  code: string
-}
+type Country = {
+  name: string;
+  code: string;
+};
 
