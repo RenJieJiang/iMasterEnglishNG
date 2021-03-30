@@ -1,4 +1,11 @@
 section {
+  @media (min-width: 20rem) {
+    font-size: 100%; // 100% of 16px = 16px
+  }
+  @media (min-width: 30em) {
+    font-size: 120%; // 120% of 16px = 19.2px
+  }
+
   display: flex;
   justify-content: space-around;
   // div{border:1px solid rgb(243, 11, 69)}
@@ -25,6 +32,9 @@ section {
 }
 .item { flex-grow: 1; }
 
+.radioButton{
+  vertical-align: middle;
+}
 // :host ::ng-deep .p-dropdown {
 //   width: 14rem;
 // }

@@ -19,7 +19,10 @@
       </div>
     </div>
   </section>
-
+  <!-- <div class="container-sm">100% wide until small breakpoint</div>
+  <div class="container-md">100% wide until medium breakpoint</div>
+  <div class="container-lg">100% wide until large breakpoint</div>
+  <div class="container-xl">100% wide until extra large breakpoint</div> -->
   <section class="container-fluid">
     <div class="container-fluid">
       <div class="row">
@@ -214,7 +217,7 @@
               [(ngModel)]="city"
               inputId="city1"
               styleClass="p-mx-2"
-              style="vertical-align: middle"
+              class="radioButton"
             ></p-radioButton>
             <label for="city2">Los Angeles</label>
             <p-radioButton
@@ -223,7 +226,7 @@
               [(ngModel)]="city"
               inputId="city2"
               styleClass="p-mx-2"
-              style="vertical-align: middle"
+              class="radioButton"
             ></p-radioButton>
           </div>
           <label *ngIf="city">{{ city }} selected</label>
