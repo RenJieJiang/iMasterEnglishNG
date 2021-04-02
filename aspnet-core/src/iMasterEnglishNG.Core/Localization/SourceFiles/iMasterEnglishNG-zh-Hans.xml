@@ -105,6 +105,7 @@
     <!--Word-->
     <text name="Word">单词</text>
     <text name="Words">单词</text>
+    <text name="WordMaintenance">单词维护</text>
     <text name="Frequency">频率</text>
     <text name="PhoneticSymbol">音标</text>
     <text name="Definition">解释</text>

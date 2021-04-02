@@ -1,15 +1,15 @@
 import { Component, Injector } from "@angular/core";
 import { finalize } from "rxjs/operators";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-import { appModuleAnimation } from "@shared/animations/routerTransition";
+import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
   PagedListingComponentBase,
   PagedRequestDto,
 } from "@shared/paged-listing-component-base";
-import { WordServiceProxy } from "../services/word/word.service";
+import { WordServiceProxy } from "../../services/word/word.service";
 import WordDto from "@app/services/word/word.model";
-import { CreateWordDialogComponent } from "./create-word/create-word-dialog.component";
-import { EditWordDialogComponent } from "./edit-word/edit-word-dialog.component";
+import { CreateWordDialogComponent } from "../create-word/create-word-dialog.component";
+import { EditWordDialogComponent } from "../edit-word/edit-word-dialog.component";
 import { Select, Store } from "@ngxs/store";
 import { Word } from "@app/store/actions/word.actions";
 import { WordState } from "@app/store/states/word.state";
@@ -28,11 +28,13 @@ class PagedWordsRequestDto extends PagedRequestDto {
 }
 
 @Component({
-  templateUrl: "./words.component.html",
-  animations: [appModuleAnimation()],
-  styleUrls: ['./words.component.scss']
+  selector: 'app-word-maintenance',
+  templateUrl: './word-maintenance.component.html',
+  styleUrls: ['./word-maintenance.component.css'],
+  animations: [appModuleAnimation()]
 })
-export class WordsComponent extends PagedListingComponentBase<WordDto> {
+export class WordMaintenanceComponent extends PagedListingComponentBase<WordDto> {
+
   @Select(WordState.getWords)
   words$: Observable<SearchResult<WordDto>>;
 
@@ -145,6 +147,7 @@ export class WordsComponent extends PagedListingComponentBase<WordDto> {
   }
 
   checkRouteUrl() {
-    return this.router.url == '/app/words';
+    return this.router.url == '/app/words/word-maintenance';
   }
+
 }

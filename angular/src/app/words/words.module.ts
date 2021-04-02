@@ -4,7 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { NgxPaginationModule } from "ngx-pagination";
 import { WordsRoutingModule } from "./words-routing.module";
-import { WordsComponent } from "./words.component";
 import { CreateWordDialogComponent } from "./create-word/create-word-dialog.component";
 import { EditWordDialogComponent } from "./edit-word/edit-word-dialog.component";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -24,13 +23,14 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {PanelModule} from 'primeng/panel';
 import {CalendarModule} from 'primeng/calendar';
+import { WordMaintenanceComponent } from './word-maintenance/word-maintenance.component';
 
 @NgModule({
   declarations: [
-    WordsComponent,
     CreateWordDialogComponent,
     EditWordDialogComponent,
     ChildOneComponent,
+    WordMaintenanceComponent,
   ],
   imports: [
     BsDatepickerModule.forRoot(),

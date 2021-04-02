@@ -8,8 +8,6 @@ import { UsersComponent } from './users/users.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
-import { WordsComponent } from './words/words.component';
-import { ChildOneComponent } from './words/child-one/child-one.component';
 
 @NgModule({
     imports: [
@@ -31,7 +29,26 @@ import { ChildOneComponent } from './words/child-one/child-one.component';
                             permission: 'Pages.Words',
                             breadcrumb: {alias: '@Words'},
                             icon: "fas fa-pen",
-                            children: { path: 'child-one', icon: "fas fa-user-graduate" }
+                            children: [
+                                {
+                                    path: 'word-maintenance',
+                                    data : {
+                                        permission: 'Pages.Words',
+                                        breadcrumb: {alias: '@WordMaintenance'},
+                                        icon: "fas fa-tools",
+                                        children: [
+                                            {
+                                                path: 'child-one',
+                                                data: {
+                                                    breadcrumb: {alias: '@ChildOne'},
+                                                    icon: "fas fa-baby",
+                                                }
+                                            }
+                                        ]
+                                    }
+
+                                }
+                            ]
                         }
                     }
                 ]

@@ -19,6 +19,7 @@ export class ChildOneComponent implements OnInit {
   items: MenuItem[];
   countries: any[];
   selectedCountry: Country;
+  city: City;
 
   constructor(
     private router: Router,
@@ -78,7 +79,6 @@ export class ChildOneComponent implements OnInit {
   }
 
   confirm1() {
-    debugger;
     this.confirmationService.confirm({
         message: 'Are you sure that you want to proceed?',
         header: 'Confirmation',

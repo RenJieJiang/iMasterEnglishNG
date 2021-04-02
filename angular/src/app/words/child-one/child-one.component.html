@@ -1,4 +1,4 @@
-<div *ngIf="checkRouteUrl()">
+<div>
   <section>
     <h5>
       <span><b>This is a section with flex style</b></span>
@@ -79,12 +79,12 @@
           <button type="button" class="btn btn-primary">Button</button>
         </div>
         <div class="col-xl-2 col-lg-4 col-12">
-          <p-splitButton
+          <!-- <p-splitButton
             label="Save"
             icon="pi pi-plus"
             (onClick)="save('info')"
             [model]="items"
-          ></p-splitButton>
+          ></p-splitButton> -->
         </div>
         <div class="col-xl-2 col-lg-4 col-12">
           <p-confirmDialog
@@ -101,12 +101,12 @@
         </div>
         <div class="col-xl-2 col-lg-4 col-12">
           <!-- <label for="icon">DateTime</label> -->
-          <p-calendar
+          <!-- <p-calendar
             [(ngModel)]="date7"
             [showTime]="true"
             [showIcon]="true"
             inputId="icon"
-          ></p-calendar>
+          ></p-calendar> -->
         </div>
         <div class="col-xl-3 col-lg-4 col-12">
           <div>
@@ -146,14 +146,14 @@
           </div>
         </div>
         <div class="col-xl-1 col-lg-4 col-12">
-          <div class="p-field-checkbox" style="border: 0; width: 100px">
+          <!-- <div class="p-field-checkbox" style="border: 0; width: 100px">
             <p-checkbox
               [(ngModel)]="checked"
               binary="true"
               inputId="binary"
             ></p-checkbox>
             <label for="binary">{{ checked }}</label>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

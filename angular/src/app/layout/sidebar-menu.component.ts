@@ -35,19 +35,19 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
   ngOnInit(): void {
     //this.menuItems = this.getMenuItems();
     //this.patchMenuItems(this.menuItems);
-    this.routerEvents
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        const currentUrl = event.url !== "/" ? event.url : this.homeRoute;
-        const primaryUrlSegmentGroup = this.router.parseUrl(currentUrl).root
-          .children[PRIMARY_OUTLET];
-        if (primaryUrlSegmentGroup) {
-          debugger;
-          this.activateMenuItems("/" + primaryUrlSegmentGroup.toString());
-        }
 
-        // this.parseRouterConf();
-      });
+    // this.routerEvents
+    //   .pipe(filter((event) => event instanceof NavigationEnd))
+    //   .subscribe((event) => {
+    //     const currentUrl = event.url !== "/" ? event.url : this.homeRoute;
+    //     const primaryUrlSegmentGroup = this.router.parseUrl(currentUrl).root
+    //       .children[PRIMARY_OUTLET];
+    //     if (primaryUrlSegmentGroup) {
+    //       this.activateMenuItems("/" + primaryUrlSegmentGroup.toString());
+    //     }
+
+    //     // this.parseRouterConf();
+    //   });
 
     this.parseRouteConfigToMenu("", this.router.config);
 
@@ -187,15 +187,30 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
         if (!route.data?.children) {
           this.menuItemsFromRoutes.push(menu);
         } else {
-          this.menuItemsFromRoutes.push({...menu, items: [
-            {
-              label: this.l(route.data?.children.path),
-              icon: route.data?.children.icon,
-              routerLink:
-                parent + "/" + route.path + "/" + route.data?.children.path,
-                //TODO: add permission
-            },
-          ]});
+
+          let childMenu = {
+            label: this.l(this.titleCaseWord(route.data?.children[0].path)),
+            icon: route.data?.children[0].data?.icon,
+            routerLink:
+              parent + "/" + route.path + "/" + route.data?.children[0].path,
+              //TODO: add permission
+          };
+          let childAndGrandChildMenus;
+
+          //3rd level menu
+          if (route.data?.children[0].data?.children) {
+            const grandchildMenu = {
+              label: this.l(this.titleCaseWord(route.data?.children[0].data?.children[0].path)),
+              icon: route.data?.children[0].data?.children[0].data?.icon,
+              routerLink: parent + "/" + route.path + "/" + route.data?.children[0].path + "/" + route.data?.children[0].data?.children[0].path,
+              //TODO: add permission
+            }
+
+            childAndGrandChildMenus = {...childMenu, items: [grandchildMenu]};
+          }
+
+          const itemsReady = childAndGrandChildMenus ? childAndGrandChildMenus : childMenu;
+          this.menuItemsFromRoutes.push({...menu, items: [itemsReady]});
         }
       }
       if (route.children) {

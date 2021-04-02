@@ -122,6 +122,7 @@
     <!--Word-->
     <text name="Word">Word</text>
     <text name="Words">Words</text>
+    <text name="WordMaintenance">Word Maintenance</text>
     <text name="Frequency">Frequency</text>
     <text name="PhoneticSymbol">Phonetic Symbol</text>
     <text name="Definition">Definition</text>
