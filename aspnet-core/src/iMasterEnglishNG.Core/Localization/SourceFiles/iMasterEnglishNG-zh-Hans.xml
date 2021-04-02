@@ -2,6 +2,7 @@
 <localizationDictionary culture="zh-Hans">
   <texts>
     <text name="HomePage" value="主页" />
+    <text name="Home" value="首页" />
     <text name="About" value="关于我们" />
     <text name="WelcomeMessage" value="欢迎使用 iMasterEnglishNG!" />
     <text name="FormIsNotValidMessage" value="部分输入信息不符合要求，请检查并改正.." />
@@ -51,6 +52,7 @@
     <text name="Title" >标题</text>
     <text name="Content" >内容</text>
     <text name="ChangePassword" >修改密码</text>
+    <text name="UpdatePassword" >修改密码</text>
     <text name="PasswordComplexityNotSatisfied">密码复杂度要求不符.</text>
     <text name="PasswordRequireDigit">密码至少需要一位是0到9的数字.</text>
     <text name="PasswordRequireLowercase">密码至少需要一位是a到z的小写字母.</text>

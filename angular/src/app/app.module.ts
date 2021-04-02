@@ -54,9 +54,11 @@ import {SplitterModule} from 'primeng/splitter';
 import {TabViewModule} from 'primeng/tabview';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService, MenuItem} from 'primeng/api';
 import {PanelModule} from 'primeng/panel';
 import {CalendarModule} from 'primeng/calendar';
+import {PanelMenuModule} from 'primeng/panelmenu';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -113,6 +115,8 @@ import {CalendarModule} from 'primeng/calendar';
     CalendarModule,
     CollapseModule,
     TabsModule,
+    PanelMenuModule,
+    ChartModule,
     AppRoutingModule,
     ServiceProxyModule,
     SharedModule,

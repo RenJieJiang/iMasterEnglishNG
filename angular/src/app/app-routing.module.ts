@@ -18,16 +18,21 @@ import { ChildOneComponent } from './words/child-one/child-one.component';
                 path: '',
                 component: AppComponent,
                 children: [
-                    { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard], data: { breadcrumb: 'Home' }},
-                    { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users', breadcrumb: 'Users' }, canActivate: [AppRouteGuard] },
-                    { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles', breadcrumb: 'Roles' }, canActivate: [AppRouteGuard] },
-                    { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants', breadcrumb: 'Tenants' }, canActivate: [AppRouteGuard] },
-                    { path: 'about', component: AboutComponent, data: { breadcrumb: 'About' } },
-                    { path: 'update-password', component: ChangePasswordComponent, data: { breadcrumb: 'Update Password' } },
+                    { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard], data: { breadcrumb: 'Home', icon: "fas fa-home" }},
+                    { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users', breadcrumb: 'Users', icon: "fas fa-users" }, canActivate: [AppRouteGuard] },
+                    { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles', breadcrumb: 'Roles', icon: "fas fa-theater-masks" }, canActivate: [AppRouteGuard] },
+                    { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants', breadcrumb: 'Tenants',icon: "fas fa-building" }, canActivate: [AppRouteGuard] },
+                    { path: 'about', component: AboutComponent, data: { breadcrumb: 'About', icon: "fas fa-user-graduate" } },
+                    { path: 'update-password', component: ChangePasswordComponent, data: { breadcrumb: 'Update Password',icon: "fas fa-user-edit" } },
                     {
                         path: 'words',
                         loadChildren: () => import('app/words/words.module').then(m => m.WordsModule), // Lazy load WordsModule
-                        data: { breadcrumb: {alias: '@Words'} }
+                        data: {
+                            permission: 'Pages.Words',
+                            breadcrumb: {alias: '@Words'},
+                            icon: "fas fa-pen",
+                            children: { path: 'child-one', icon: "fas fa-user-graduate" }
+                        }
                     }
                 ]
             },

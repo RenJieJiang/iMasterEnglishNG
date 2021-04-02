@@ -1,4 +1,4 @@
-<nav class="mt-2">
+<!-- <nav class="mt-2">
   <ul
     class="nav nav-pills nav-sidebar flex-column nav-flat"
     data-widget="treeview"
@@ -11,7 +11,7 @@
       ></ng-container>
     </ng-container>
   </ul>
-</nav>
+</nav> -->
 
 <ng-template #sidebarInner let-item="item">
   <li
@@ -31,7 +31,7 @@
         {{ item.label }}
       </p>
     </a>
-    <a
+    <!-- <a
       *ngIf="item.route && item.route.indexOf('http') == 0 && !item.children"
       class="nav-link"
       target="_blank"
@@ -41,7 +41,7 @@
       <p>
         {{ item.label }}
       </p>
-    </a>
+    </a> -->
     <a
       *ngIf="!item.route && item.children"
       class="nav-link"
@@ -69,3 +69,4 @@
     </ul>
   </li>
 </ng-template>
+<p-panelMenu [model]="authorizedMenuItems" [style]="{'width':'100%'}" ></p-panelMenu>

@@ -1,140 +1,85 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { AppComponentBase } from '@shared/app-component-base';
+import { Component, Injector, OnInit } from "@angular/core";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   Router,
+  Route,
   RouterEvent,
   NavigationEnd,
-  PRIMARY_OUTLET
-} from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { MenuItem } from '@shared/layout/menu-item';
+  PRIMARY_OUTLET,
+} from "@angular/router";
+import { BehaviorSubject } from "rxjs";
+import { filter } from "rxjs/operators";
+import { MenuItem } from "@shared/layout/menu-item";
+import { MenuItem as PrimeMenuItem } from "primeng/api";
 
 @Component({
-  selector: 'sidebar-menu',
-  templateUrl: './sidebar-menu.component.html'
+  selector: "sidebar-menu",
+  templateUrl: "./sidebar-menu.component.html",
+  styleUrls: ["./sidebar-menu.component.scss"],
 })
 export class SidebarMenuComponent extends AppComponentBase implements OnInit {
   menuItems: MenuItem[];
+  authorizedMenuItems: PrimeMenuItem[];
+  menuItemsFromRoutes: PrimeMenuItem[] = [];
   menuItemsMap: { [key: number]: MenuItem } = {};
   activatedMenuItems: MenuItem[] = [];
   routerEvents: BehaviorSubject<RouterEvent> = new BehaviorSubject(undefined);
-  homeRoute = '/app/home';
+  homeRoute = "/app/home";
+  routes: any[];
 
-  constructor(injector: Injector, private router: Router) {
+  constructor(private injector: Injector, private router: Router) {
     super(injector);
-    this.router.events.subscribe(this.routerEvents);
+    router.events.subscribe(this.routerEvents);
   }
 
   ngOnInit(): void {
-    this.menuItems = this.getMenuItems();
-    this.patchMenuItems(this.menuItems);
+    //this.menuItems = this.getMenuItems();
+    //this.patchMenuItems(this.menuItems);
     this.routerEvents
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
-        const currentUrl = event.url !== '/' ? event.url : this.homeRoute;
+        const currentUrl = event.url !== "/" ? event.url : this.homeRoute;
         const primaryUrlSegmentGroup = this.router.parseUrl(currentUrl).root
           .children[PRIMARY_OUTLET];
         if (primaryUrlSegmentGroup) {
-          this.activateMenuItems('/' + primaryUrlSegmentGroup.toString());
+          debugger;
+          this.activateMenuItems("/" + primaryUrlSegmentGroup.toString());
         }
+
+        // this.parseRouterConf();
       });
+
+    this.parseRouteConfigToMenu("", this.router.config);
+
+    this.authorizedMenuItems = this.getAuthorizedMenuItems(this.menuItemsFromRoutes);
   }
 
-  getMenuItems(): MenuItem[] {
-    return [
-      new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home'),
-      new MenuItem(
-        this.l('Tenants'),
-        '/app/tenants',
-        'fas fa-building',
-        'Pages.Tenants'
-      ),
-      new MenuItem(
-        this.l('Users'),
-        '/app/users',
-        'fas fa-users',
-        'Pages.Users'
-      ),
-      new MenuItem(
-        this.l('Roles'),
-        '/app/roles',
-        'fas fa-theater-masks',
-        'Pages.Roles'
-      ),
-      new MenuItem(this.l('Words'),'','fas fa-circle','',[
-        new MenuItem(
-          '单词维护',
-          '/app/words',
-          'fas fa-dot-circle',
-          'Pages.Roles', [
-            new MenuItem(
-              'child-one',
-              '/app/words/child-one',
-              'far fa-circle',
-              ''
-            ),
-          ]
-        )
-      ]),
-      new MenuItem(this.l('About'), '/app/about', 'fas fa-info-circle'),
-      new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
-        new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [
-          new MenuItem(
-            'Home',
-            'https://aspnetboilerplate.com?ref=abptmpl',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Templates',
-            'https://aspnetboilerplate.com/Templates?ref=abptmpl',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Samples',
-            'https://aspnetboilerplate.com/Samples?ref=abptmpl',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Documents',
-            'https://aspnetboilerplate.com/Pages/Documents?ref=abptmpl',
-            'far fa-circle'
-          ),
-        ]),
-        new MenuItem('ASP.NET Zero', '', 'fas fa-dot-circle', '', [
-          new MenuItem(
-            'Home',
-            'https://aspnetzero.com?ref=abptmpl',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Features',
-            'https://aspnetzero.com/Features?ref=abptmpl',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Pricing',
-            'https://aspnetzero.com/Pricing?ref=abptmpl#pricing',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Faq',
-            'https://aspnetzero.com/Faq?ref=abptmpl',
-            'far fa-circle'
-          ),
-          new MenuItem(
-            'Documents',
-            'https://aspnetzero.com/Documents?ref=abptmpl',
-            'far fa-circle'
-          )
-        ])
-      ])
-    ];
-  }
+  /**
+   * Get the router.config and load all lazy module using the configLoader
+   */
+  // parseRouterConf() {
+  //   this.routes = this.router.config.reduce((acc, route) => {
+  //     const children = [];
+  //     if (route.loadChildren) {
+  //       (<any>this.router).configLoader.load(this.injector, route).subscribe({
+  //         next: (moduleConf) => {
+  //           children.push(
+  //             ...moduleConf.routes.map((childRoute) => childRoute.path)
+  //           );
+  //         },
+  //       });
+  //     }
+  //     acc.push({
+  //       path: route.path,
+  //       children,
+  //     });
+  //     return acc;
+  //   }, []);
+  // }
 
   patchMenuItems(items: MenuItem[], parentId?: number): void {
     items.forEach((item: MenuItem, index: number) => {
-      item.id = parentId ? Number(parentId + '' + (index + 1)) : index + 1;
+      item.id = parentId ? Number(parentId + "" + (index + 1)) : index + 1;
       if (parentId) {
         item.parentId = parentId;
       }
@@ -192,10 +137,87 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     }
   }
 
-  isMenuItemVisible(item: MenuItem): boolean {
-    if (!item.permissionName) {
+  isMenuItemVisible(item: PrimeMenuItem): boolean {
+    if (!item.state?.permission) {
       return true;
     }
-    return this.permission.isGranted(item.permissionName);
+    return this.permission.isGranted(item.state?.permission);
+  }
+
+  getAuthorizedMenuItems(menus: PrimeMenuItem[]): PrimeMenuItem[] {
+    menus.forEach((item) => {
+      item.visible = this.isMenuItemVisible(item);
+    });
+    return menus;
+  }
+
+  convertMenuItemsToRoutes(parent: String, config: Route[]): PrimeMenuItem[] {
+    const menuItems: PrimeMenuItem[] = [];
+    config.forEach((r) => {
+      menuItems.push({
+        label: this.l(r.path),
+        icon: r.data?.icon,
+        routerLink: r.path,
+        state: { permission: "Pages.Tenants" },
+      });
+    });
+
+    return menuItems;
+  }
+
+  parseRouteConfigToMenu(parent: String, config: Route[]) {
+    config.forEach((route) => {
+
+      //console.log(parent + "/" + route.path);
+
+      if (parent.length > 0 && route.path?.length > 0) {
+        //>=3 level menus, just return. _loadedConfig can only detect 2 level menus for the 1st load time.
+        //2nd time, seems angular will cash the menus _loadedConfig will detect > 2 levels
+        if (parent.split("/").length >= 3) {
+          return;
+        }
+
+        const menu = {
+          label: this.l(this.titleCaseWord(route.path)),
+          icon: route.data?.icon,
+          routerLink: parent + "/" + route.path,
+          state: { permission: route.data?.permission },
+        };
+
+        if (!route.data?.children) {
+          this.menuItemsFromRoutes.push(menu);
+        } else {
+          this.menuItemsFromRoutes.push({...menu, items: [
+            {
+              label: this.l(route.data?.children.path),
+              icon: route.data?.children.icon,
+              routerLink:
+                parent + "/" + route.path + "/" + route.data?.children.path,
+                //TODO: add permission
+            },
+          ]});
+        }
+      }
+      if (route.children) {
+        const currentPath = route.path ? parent + "/" + route.path : parent;
+        this.parseRouteConfigToMenu(currentPath, route.children);
+      }
+      if (route["_loadedConfig"]) {
+        const currentPath = route.path ? parent + "/" + route.path : parent;
+        const children = route["_loadedConfig"].routes;
+        this.parseRouteConfigToMenu(currentPath, children);
+      }
+    });
+  }
+
+  titleCaseWord(word: string) {
+    if (!word) return word;
+
+    let formattedWord: string = "";
+    word.split("-").forEach((w) => {
+      formattedWord += w[0].toUpperCase() + w.substr(1).toLowerCase();
+    });
+
+    return formattedWord;
   }
 }
