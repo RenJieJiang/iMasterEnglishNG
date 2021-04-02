@@ -177,16 +177,23 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
           return;
         }
 
-        const menu = {
-          label: this.l(this.titleCaseWord(route.path)),
-          icon: route.data?.icon,
-          routerLink: parent + "/" + route.path,
-          state: { permission: route.data?.permission },
-        };
-
         if (!route.data?.children) {
-          this.menuItemsFromRoutes.push(menu);
-        } else {
+          this.menuItemsFromRoutes.push({
+            label: this.l(this.titleCaseWord(route.path)),
+            icon: route.data?.icon,
+            routerLink: parent + "/" + route.path,
+            state: { permission: route.data?.permission },
+          });
+        }
+        //menus has child
+        else {
+          //outer parent menu needn't routeLink
+          const menu = {
+            label: this.l(this.titleCaseWord(route.path)),
+            icon: route.data?.icon,
+            //routerLink: parent + "/" + route.path,
+            state: { permission: route.data?.permission },
+          };
 
           let childMenu = {
             label: this.l(this.titleCaseWord(route.data?.children[0].path)),

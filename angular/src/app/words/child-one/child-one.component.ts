@@ -31,7 +31,7 @@ export class ChildOneComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.breadcrumbService.set("@ChildOne", "Child One");
+    this.breadcrumbService.set("@ChildOne", "ChildOne");
     this.initData();
   }
 
