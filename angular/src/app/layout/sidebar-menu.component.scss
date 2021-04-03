@@ -1,20 +1,23 @@
-// ::ng-deep .p-panelmenu .p-panelmenu-header.p-highlight > a:hover {
-//   color: red;
-//   background-color: transparent;
-// }
 :host ::ng-deep .p-panelmenu .p-panelmenu-header > a {
   //color: #c2c7d0;
   font-weight: 400;
   background-color: transparent;
   border: transparent;
 }
+
+:host ::ng-deep .p-highlight .p-menuitem-text {
+  z-index: 1;
+  font-weight: 700;
+}
+
+// :host ::ng-deep .p-panelmenu .p-panelmenu-header a.p-menuitem-link-active {
+//   outline: 0 none;
+//   outline-offset: 0;
+//   box-shadow: 0 0 0 0.2rem #a6d5fa;
+// }
+
 :host ::ng-deep .p-panelmenu .p-panelmenu-content {
   //color: #c2c7d0;
   background-color: transparent;
   border: transparent;
 }
-// :host ::ng-deep .p-panelmenu .p-panelmenu-header.p-highlight > a:hover {
-//   color: #c2c7d0;
-//   background-color: #007bff;
-//   border: 1px solid rgb(212, 210, 210);
-// }

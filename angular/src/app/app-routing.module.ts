@@ -49,7 +49,8 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 
                                 }
                             ]
-                        }
+                        },
+                        canActivate: [AppRouteGuard]
                     }
                 ]
             },
