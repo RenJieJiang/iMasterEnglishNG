@@ -83,6 +83,8 @@ export class WordMaintenanceComponent extends PagedListingComponentBase<WordDto>
       .pipe(
         finalize(() => {
           finishedCallback();
+          //subscribe words$ to get the result, then be able to call this.showPaging()
+          //otherwise needn't subscribe words$, just use words$ @Select observable in html.
           this.words$.subscribe((result: SearchResult<WordDto>) => {
             this.words = result.items;
             this.showPaging(result, pageNumber);
