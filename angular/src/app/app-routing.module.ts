@@ -20,7 +20,6 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users', breadcrumb: 'Users', icon: "fas fa-users" }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles', breadcrumb: 'Roles', icon: "fas fa-theater-masks" }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants', breadcrumb: 'Tenants',icon: "fas fa-building" }, canActivate: [AppRouteGuard] },
-                    { path: 'about', component: AboutComponent, data: { breadcrumb: 'About', icon: "fas fa-user-graduate" } },
                     { path: 'update-password', component: ChangePasswordComponent, data: { breadcrumb: 'Update Password',icon: "fas fa-user-edit" } },
                     {
                         path: 'words',
@@ -51,7 +50,8 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                             ]
                         },
                         canActivate: [AppRouteGuard]
-                    }
+                    },
+                    { path: 'about', component: AboutComponent, data: { breadcrumb: 'About', icon: "fas fa-user-graduate" } },
                 ]
             },
         ])
