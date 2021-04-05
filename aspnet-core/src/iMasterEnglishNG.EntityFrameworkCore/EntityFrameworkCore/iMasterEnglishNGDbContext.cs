@@ -13,6 +13,7 @@ namespace iMasterEnglishNG.EntityFrameworkCore
         /* Define a DbSet for each entity of the application */
 
         public DbSet<WordEntity> Words { get; set; }
+        public DbSet<SentenceEntity> Sentences { get; set; }
 
         public iMasterEnglishNGDbContext(DbContextOptions<iMasterEnglishNGDbContext> options)
             : base(options)

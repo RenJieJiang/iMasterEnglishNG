@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -13,6 +13,10 @@
     <Compile Remove="Migrations\20190111071724_Upgraded_To_Abp_v4_1_0.cs" />
     <Compile Remove="Migrations\20210323130456_Update_Words_Id.cs" />
     <Compile Remove="Migrations\20210323130456_Update_Words_Id.Designer.cs" />
+    <Compile Remove="Migrations\20210404122606_Add_Sentences.cs" />
+    <Compile Remove="Migrations\20210404122606_Add_Sentences.Designer.cs" />
+    <Compile Remove="Migrations\20210404122731_Add_Sentences.cs" />
+    <Compile Remove="Migrations\20210404122731_Add_Sentences.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />

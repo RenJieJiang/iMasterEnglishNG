@@ -27,7 +27,7 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                         data: {
                             permission: 'Pages.Words',
                             breadcrumb: {alias: '@Words'},
-                            icon: "fas fa-pen",
+                            icon: "fas fa-file-word",
                             children: [
                                 {
                                     path: 'word-maintenance',
@@ -45,7 +45,26 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                                             }
                                         ]
                                     }
-
+                                }
+                            ]
+                        },
+                        canActivate: [AppRouteGuard]
+                    },
+                    {
+                        path: 'sentences',
+                        loadChildren: () => import('app/sentences/sentences.module').then(m => m.SentencesModule), // Lazy load WordsModule
+                        data: {
+                            permission: 'Pages.Sentences',
+                            breadcrumb: {alias: '@Sentences'},
+                            icon: "fas fa-book",
+                            children: [
+                                {
+                                    path: 'sentence-maintenance',
+                                    data : {
+                                        permission: 'Pages.Sentences',
+                                        breadcrumb: {alias: '@SentenceMaintenance'},
+                                        icon: "fas fa-tools",
+                                    }
                                 }
                             ]
                         },
@@ -55,7 +74,6 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                 ]
             },
         ])
-
     ],
     exports: [RouterModule]
 })

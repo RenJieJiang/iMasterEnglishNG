@@ -113,6 +113,17 @@
     <text name="Antonym">反义词</text>
     <text name="CreateWord">新建单词</text>
     <text name="EditWord">编辑单词</text>
+    <text name="WordDeleteWarningMessage">单词{0}将会被删除.</text>
+    <!--Sentence-->
+    <text name="Sentence">句子</text>
+    <text name="Sentences">句子</text>
+    <text name="SentenceMaintenance">句子维护</text>
+    <text name="Difficulty">难度系数</text>
+    <text name="Translate">译文</text>
+    <text name="NewWord">生词</text>
+    <text name="CreateSentence">新建句子</text>
+    <text name="EditSentence">编辑句子</text>
+    <text name="SentenceDeleteWarningMessage">这个句子将会被删除.</text>
   </texts>
 </localizationDictionary>
 

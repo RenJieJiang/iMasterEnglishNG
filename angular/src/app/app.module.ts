@@ -39,6 +39,7 @@ import { SidebarLogoComponent } from "./layout/sidebar-logo.component";
 import { SidebarUserPanelComponent } from "./layout/sidebar-user-panel.component";
 import { SidebarMenuComponent } from "./layout/sidebar-menu.component";
 import { WordState } from "./store/states/word.state";
+import { SentenceState } from "./store/states/sentence.state";
 import { NgxsModule } from "@ngxs/store";
 import { MaterialModule } from "../material.module";
 import { BreadcrumbModule } from "xng-breadcrumb";
@@ -121,7 +122,7 @@ import {ChartModule} from 'primeng/chart';
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
-    NgxsModule.forRoot([WordState],
+    NgxsModule.forRoot([WordState,SentenceState]
     )
   ],
   providers: [BreadcrumbService, ConfirmationService, MessageService],

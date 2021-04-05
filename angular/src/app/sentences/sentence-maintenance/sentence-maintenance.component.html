@@ -3,10 +3,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
-          <h1>{{ "Words" | localize }}</h1>
+          <h1>{{ "Sentences" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:;" class="btn bg-blue" (click)="createWord()">
+          <a href="javascript:;" class="btn bg-blue" (click)="createSentence()">
             <i class="fa fa-plus-square"></i>
             {{ "Create" | localize }}
           </a>
@@ -31,9 +31,9 @@
             <input
               type="text"
               class="form-control"
-              name="word"
+              name="sentence"
               [placeholder]="'SearchWithThreeDot' | localize"
-              [(ngModel)]="word"
+              [(ngModel)]="sentence"
               (keyup.enter)="getDataPage(1)"
             />
           </div>
@@ -41,7 +41,7 @@
         <div>
           <ngx-datatable
             class="bootstrap"
-            [rows]="words"
+            [rows]="sentences"
             [loadingIndicator]="loadingIndicator"
             [sortType]="SortType.single"
             [columns]="columns"
@@ -55,29 +55,36 @@
             [externalSorting]="true"
             [scrollbarH]="true"
             [count]="totalItems"
-            [offset]="pageNumber-1"
+            [offset]="pageNumber - 1"
             [limit]="pageSize"
-            (page)="getDataPage($event.offset+1)"
+            (page)="getDataPage($event.offset + 1)"
             (sort)="sortChange($event)"
           >
-            <ngx-datatable-column name="Word" sortable="true" prop="word">
-            </ngx-datatable-column>
             <ngx-datatable-column
-              name="Frequency"
+              name="Id"
               sortable="true"
-              prop="frequency"
+              prop="id"
+              [width]="100"
+            ></ngx-datatable-column>
+            <ngx-datatable-column
+              name="Sentence"
+              sortable="true"
+              prop="sentence"
+              [width]="300"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Phonetic Symbol"
-              sortable="false"
-              prop="phoneticSymbol"
+              name="Difficulty Level"
+              sortable="true"
+              prop="difficulty"
             >
             </ngx-datatable-column>
+            <ngx-datatable-column name="New Word" sortable="true" prop="word">
+            </ngx-datatable-column>
             <ngx-datatable-column
-              name="Definition"
+              name="Translation"
               sortable="true"
-              prop="definition"
+              prop="translate"
               [width]="300"
             >
             </ngx-datatable-column>
@@ -87,15 +94,12 @@
               prop="formattedCreationTime"
             >
             </ngx-datatable-column>
-            <ngx-datatable-column name="Actions" sortable="false" [width]="170">
-              <ng-template
-                let-row="row"
-                ngx-datatable-cell-template
-              >
+            <ngx-datatable-column name="Actions" sortable="false" [width]="200">
+              <ng-template let-row="row" ngx-datatable-cell-template>
                 <button
                   type="button"
-                  class="btn btn-sm bg-secondary "
-                  (click)="editWord(row.id)"
+                  class="btn btn-sm bg-secondary"
+                  (click)="editSentence(row.id)"
                 >
                   <i class="fas fa-pencil-alt"></i>
                   {{ "Edit" | localize }}
@@ -117,4 +121,3 @@
   </section>
 </div>
 <router-outlet></router-outlet>
-

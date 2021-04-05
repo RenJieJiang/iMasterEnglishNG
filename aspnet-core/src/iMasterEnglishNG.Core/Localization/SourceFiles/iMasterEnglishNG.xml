@@ -131,5 +131,15 @@
     <text name="CreateWord">Create Word</text>
     <text name="EditWord">Edit Word</text>
     <text name="WordDeleteWarningMessage">Word {0} will be deleted.</text>
+    <!--Sentence-->
+    <text name="Sentence">Sentence</text>
+    <text name="Sentences">Sentences</text>
+    <text name="SentenceMaintenance">Sentence Maintenance</text>
+    <text name="Difficulty">Difficulty Level</text>
+    <text name="Translate">Translation</text>
+    <text name="NewWord">New Word(s)</text>
+    <text name="CreateSentence">Create Sentence</text>
+    <text name="EditSentence">Edit Sentence</text>
+    <text name="SentenceDeleteWarningMessage">Sentence {0} will be deleted.</text>
   </texts>
 </localizationDictionary>
