@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
-          <h1>{{ "Sentences" | localize }}</h1>
+          <h1>{{ "SentenceMaintenance" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
           <a href="javascript:;" class="btn bg-blue" (click)="createSentence()">
@@ -61,40 +61,40 @@
             (sort)="sortChange($event)"
           >
             <ngx-datatable-column
-              name="Id"
+              name="{{'Id' | localize}}"
               sortable="true"
               prop="id"
               [width]="100"
             ></ngx-datatable-column>
             <ngx-datatable-column
-              name="Sentence"
+              name="{{'Sentence' | localize}}"
               sortable="true"
               prop="sentence"
               [width]="300"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Difficulty Level"
+              name="{{'Difficulty' | localize}}"
               sortable="true"
               prop="difficulty"
             >
             </ngx-datatable-column>
-            <ngx-datatable-column name="New Word" sortable="true" prop="word">
+            <ngx-datatable-column name="{{'NewWord' | localize}}" sortable="true" prop="word">
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Translation"
+              name="{{'Translate' | localize}}"
               sortable="true"
               prop="translate"
               [width]="300"
             >
             </ngx-datatable-column>
-            <ngx-datatable-column
+            <!-- <ngx-datatable-column
               name="Created Date"
               sortable="false"
               prop="formattedCreationTime"
             >
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Actions" sortable="false" [width]="200">
+            </ngx-datatable-column> -->
+            <ngx-datatable-column name="{{'Actions' | localize}}" sortable="false" [width]="200">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <button
                   type="button"

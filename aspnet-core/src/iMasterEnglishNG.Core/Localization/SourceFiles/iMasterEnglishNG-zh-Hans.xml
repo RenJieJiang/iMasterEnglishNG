@@ -102,6 +102,10 @@
 
     <!--Global-->
     <text name="lastModificationTime">最近更新时间</text>
+    <text name="CreatedDate">创建时间</text>
+    <text name="Id">序号</text>
+    
+    
     <!--Word-->
     <text name="Word">单词</text>
     <text name="Words">单词</text>

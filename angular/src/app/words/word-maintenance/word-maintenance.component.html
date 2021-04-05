@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-6">
-          <h1>{{ "Words" | localize }}</h1>
+          <h1>{{ "WordMaintenance" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
           <a href="javascript:;" class="btn bg-blue" (click)="createWord()">
@@ -60,34 +60,34 @@
             (page)="getDataPage($event.offset+1)"
             (sort)="sortChange($event)"
           >
-            <ngx-datatable-column name="Word" sortable="true" prop="word">
+            <ngx-datatable-column name="{{'Word' | localize}}" sortable="true" prop="word">
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Frequency"
+              name="{{'Frequency' | localize}}"
               sortable="true"
               prop="frequency"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Phonetic Symbol"
+              name="{{'PhoneticSymbol' | localize}}"
               sortable="false"
               prop="phoneticSymbol"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Definition"
+              name="{{'Definition' | localize}}"
               sortable="true"
               prop="definition"
               [width]="300"
             >
             </ngx-datatable-column>
             <ngx-datatable-column
-              name="Created Date"
+              name="{{'CreatedDate' | localize}}"
               sortable="false"
               prop="formattedCreationTime"
             >
             </ngx-datatable-column>
-            <ngx-datatable-column name="Actions" sortable="false" [width]="170">
+            <ngx-datatable-column name="{{'Actions' | localize}}" sortable="false" [width]="170">
               <ng-template
                 let-row="row"
                 ngx-datatable-cell-template

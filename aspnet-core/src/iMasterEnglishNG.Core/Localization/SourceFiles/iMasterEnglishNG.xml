@@ -119,6 +119,9 @@
 
     <!--Global-->
     <text name="lastModificationTime">Last Modification Time</text>
+    <text name="CreatedDate">Created Date</text>
+    <text name="Id">ID</text>
+    
     <!--Word-->
     <text name="Word">Word</text>
     <text name="Words">Words</text>

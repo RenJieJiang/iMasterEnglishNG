@@ -68,6 +68,9 @@ export class SentenceMaintenanceComponent extends PagedListingComponentBase<Sent
   ngOnInit(): void {
     super.ngOnInit();
     this.breadcrumbService.set('@SentenceMaintenance', this.l("SentenceMaintenance"));
+    this.breadcrumbService.breadcrumbs$.subscribe((definition) => {
+      definition.map(d =>d.label =  (d.alias == "@Sentences" ? this.l("Sentences") : d.label));
+    });
   }
 
   list(

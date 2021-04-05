@@ -69,6 +69,9 @@ export class WordMaintenanceComponent extends PagedListingComponentBase<WordDto>
   ngOnInit(): void {
     super.ngOnInit();
     this.breadcrumbService.set('@WordMaintenance', this.l("WordMaintenance"));
+    this.breadcrumbService.breadcrumbs$.subscribe((definition) => {
+      definition.map(d =>d.label =  (d.alias == "@Words" ? this.l("Words") : d.label));
+    });
   }
 
   list(
